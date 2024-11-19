@@ -1,0 +1,91 @@
+{
+  "FromName": "Bland Call Exports",
+  "MessageStream": "inbound",
+  "From": "exports@bland.ai",
+  "FromFull": {
+    "Email": "exports@bland.ai",
+    "Name": "Bland Call Exports",
+    "MailboxHash": ""
+  },
+  "To": "282363c6bcf96c74d89d4ba5de120a4c@inbound.postmarkapp.com",
+  "ToFull": [
+    {
+      "Email": "282363c6bcf96c74d89d4ba5de120a4c@inbound.postmarkapp.com",
+      "Name": "",
+      "MailboxHash": ""
+    }
+  ],
+  "Cc": "",
+  "CcFull": [],
+  "Bcc": "",
+  "BccFull": [],
+  "OriginalRecipient": "282363c6bcf96c74d89d4ba5de120a4c@inbound.postmarkapp.com",
+  "Subject": "Your Bland Call Export is Ready!",
+  "MessageID": "948cae60-0880-45d3-955b-a78990aff85c",
+  "ReplyTo": "",
+  "MailboxHash": "",
+  "Date": "Tue, 12 Nov 2024 02:51:43 +0000",
+  "TextBody": "",
+  "HtmlBody": "<div className=\"max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md\">\n      <header className=\"mb-6\">\n        <img src=\"https:\/\/cdn.prod.website-files.com\/66cddff3a7bb08f0bc015747\/66df929197c75b3a83185d45_Bland-Logo.png\" alt=\"Bland AI Logo\" className=\"w-32 h-32\" \/>\n      <\/header>\n      \n      <main className=\"space-y-4\">\n        <p className=\"text-muted-foreground\">\n          Dear User,\n        <\/p>\n        \n        <p>\n          Your requested data export is now ready for download. This export includes all your calls from the past 30 days.\n        <\/p>\n        \n        <p>\n          To download your data:\n        <\/p>\n        \n        <ol className=\"list-decimal list-inside space-y-2\">\n          <li>Click the button below<\/li>\n          <li>Log in to your account if prompted<\/li>\n          <li>Your download will begin automatically<\/li>\n        <\/ol>\n        \n        <div className=\"mt-6\">\n          <a href=\"https:\/\/exports-global.a818d7d8cd618ddbd9f3f0e4f03557a3.r2.cloudflarestorage.com\/batch-logs\/5b9d2e52-0d1d-472d-a100-b8b7bd433f90\/1731379897763.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=db17766ce14c1afdc4d8c116c01c46b6%2F20241112%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241112T025143Z&X-Amz-Expires=3600&X-Amz-Signature=3a9d9e8d7448d64eb2015f3dd09c5c414c9d653fe5ab2d160b39f35ee84343dc&X-Amz-SignedHeaders=host&x-id=GetObject\" className=\"w-full sm:w-auto\">\n            Download My Data\n          <\/a>\n        <\/div>\n        \n        <p className=\"text-sm text-muted-foreground mt-6\">\n          For security reasons, this download link will expire in 24 hours. If you need to access your data after this period, please request a new export.\n        <\/p>\n      <\/main>\n      \n      <footer className=\"mt-8 pt-4 border-t border-gray-200 text-sm text-muted-foreground\">\n        <p>\n          If you did not request this data export or have any questions, please contact our support team immediately.\n        <\/p>\n      <\/footer>\n    <\/div>\n",
+  "StrippedTextReply": "",
+  "Tag": "",
+  "Headers": [
+    {
+      "Name": "Return-Path",
+      "Value": "<010001931e48bda8-9964663e-9599-4329-bcd9-2baddd970b12-000000@send.bland.ai>"
+    },
+    {
+      "Name": "Received",
+      "Value": "by p-pm-inboundg01a-aws-useast1a.inbound.postmarkapp.com (Postfix, from userid 996)\tid A038C405030; Tue, 12 Nov 2024 02:51:44 +0000 (UTC)"
+    },
+    {
+      "Name": "X-Spam-Checker-Version",
+      "Value": "SpamAssassin 3.4.0 (2014-02-07) on\tp-pm-inboundg01a-aws-useast1a"
+    },
+    {
+      "Name": "X-Spam-Status",
+      "Value": "No"
+    },
+    {
+      "Name": "X-Spam-Score",
+      "Value": "2.0"
+    },
+    {
+      "Name": "X-Spam-Tests",
+      "Value": "DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HTML_IMAGE_ONLY_24,\tHTML_MESSAGE,HTML_MIME_NO_HTML_TAG,HTML_NONELEMENT_30_40,MIME_HTML_ONLY,\tRCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H4,RCVD_IN_MSPIKE_WL,\tRCVD_IN_ZEN_BLOCKED_OPENDNS,SPF_HELO_NONE,SPF_NONE,T_REMOTE_IMAGE,\tURIBL_DBL_BLOCKED_OPENDNS,URIBL_ZEN_BLOCKED_OPENDNS,URI_HEX"
+    },
+    {
+      "Name": "Received-SPF",
+      "Value": "none (send.bland.ai: No applicable sender policy available) receiver=p-pm-inboundg01a-aws-useast1a; identity=mailfrom; envelope-from=\"010001931e48bda8-9964663e-9599-4329-bcd9-2baddd970b12-000000@send.bland.ai\"; helo=a9-1.smtp-out.amazonses.com; client-ip=54.240.9.1"
+    },
+    {
+      "Name": "Received",
+      "Value": "from a9-1.smtp-out.amazonses.com (a9-1.smtp-out.amazonses.com [54.240.9.1])\t(using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128\/128 bits))\t(No client certificate requested)\tby p-pm-inboundg01a-aws-useast1a.inbound.postmarkapp.com (Postfix) with ESMTPS id 443624048DA\tfor <282363c6bcf96c74d89d4ba5de120a4c@inbound.postmarkapp.com>; Tue, 12 Nov 2024 02:51:44 +0000 (UTC)"
+    },
+    {
+      "Name": "DKIM-Signature",
+      "Value": "v=1; a=rsa-sha256; q=dns\/txt; c=relaxed\/simple; s=resend;\td=bland.ai; t=1731379904;\th=From:To:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type;\tbh=VqILWtEYAg8beH0CKEDNz9KYksOBlRN20ZQ420akuew=;\tb=dXFYPm710pl7F4VmGzG4wUzndQhy7mnwIOA2Yr3dSKFBwmsCp5mlAgFBPQaBVDzA\tFDQRpSoaMpPy0p2wQfzuamOJtUiVsVwoq5CnOyKmqChhW+wuskum68IiTpHFbBp1nJD\tfs5G1gDNcBkn5sq1ETuvQC1TG0F2dE4spkWYYJbw="
+    },
+    {
+      "Name": "DKIM-Signature",
+      "Value": "v=1; a=rsa-sha256; q=dns\/txt; c=relaxed\/simple;\ts=ug7nbtf4gccmlpwj322ax3p6ow6yfsug; d=amazonses.com; t=1731379904;\th=From:To:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type:Feedback-ID;\tbh=VqILWtEYAg8beH0CKEDNz9KYksOBlRN20ZQ420akuew=;\tb=pyQANui3DBefLaTAGDunLUA4i6NDJqukctNIIjYYOJsI8wakLU2BswVLk5oCcUe5\tjePXUI33R\/scXEZsj1jzT55jztNyz1fScrjOPKYHdM7yiCFRF6davknNskjCnxwOjKv\tBQjVQOK024jCY\/uAPn3jA6C7cXhH+Ag9rRMS1vzo="
+    },
+    {
+      "Name": "Message-ID",
+      "Value": "<010001931e48bda8-9964663e-9599-4329-bcd9-2baddd970b12-000000@email.amazonses.com>"
+    },
+    {
+      "Name": "MIME-Version",
+      "Value": "1.0"
+    },
+    {
+      "Name": "Feedback-ID",
+      "Value": "::1.us-east-1.epbACCJLarUaEI78XZoGREJ9LamRjxMH5pM2kZb64rA=:AmazonSES"
+    },
+    {
+      "Name": "X-SES-Outgoing",
+      "Value": "2024.11.12-54.240.9.1"
+    }
+  ],
+  "Attachments": []
+}

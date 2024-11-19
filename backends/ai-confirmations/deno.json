@@ -1,0 +1,24 @@
+{
+  "name":"@backends/ai-confirmations",
+  "exports": "./main.ts",
+  "tasks": {
+    "dev": "deno run -A ./tasks/dev.ts",
+    "dev:dry": "deno task dev -- dry",
+    "tunnel": "./tasks/tunnel.sh",
+    "emulate": "./tasks/emulate.sh"
+  },
+  "imports": {
+    "@libs/std": "jsr:@libs/std@^2024.10.5",
+    "@std/assert": "jsr:@std/assert@1",
+    "@global_models": "../../models/~index.d.ts",
+    "tsyringe": "npm:tsyringe@^4.8.0"
+  },
+  "deploy": {
+    "project": "ab54146d-9bc2-4520-8fca-c0a375439550",
+    "exclude": [
+      "**/node_modules"
+    ],
+    "include": ["../../models/~index.d.ts"],
+    "entrypoint": "main.ts"
+  }
+}

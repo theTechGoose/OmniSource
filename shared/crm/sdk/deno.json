@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "tasks": {
+    "model:crm": "./tasks/model_crm.sh"
+  },
+  "imports": {
+    "@std/assert": "jsr:@std/assert@1",
+    "@settings": "./settings.ts",
+    "@lib/": "./app/"
+  },
+  "deploy": {
+    "project": "ab54146d-9bc2-4520-8fca-c0a375439550",
+    "exclude": [
+      "**/node_modules"
+    ],
+    "include": [],
+    "entrypoint": "main.ts"
+  }
+}
