@@ -27,13 +27,6 @@ class AiConfirmations extends NoAuth {
   "DELETE /api/:id" = "path/to/handler";
 }
 
-type metadataKeys =
-  | "type"
-  | "paramtypes"
-  | "returntype"
-  | "custom"
-  | "label"
-  | "isCacheable";
 
 
 console.log(Application);

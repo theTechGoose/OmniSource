@@ -9,7 +9,7 @@
   "imports": {
     "@std/assert": "jsr:@std/assert@1",
     "@settings": "./settings.ts",
-    "@lib/": "./core/"
+    "@std/bdd": "./core/"
   },
   "deploy": {
     "project": "ab54146d-9bc2-4520-8fca-c0a375439550",

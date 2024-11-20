@@ -4,10 +4,10 @@
     "experimentalDecorators": true
   },
   "tasks": {
-    "ai_conf:dev": "cd ./backends/ai-confirmations && deno task dev",
-    "helloWorld": "echo 'Hello World!'",
-    "bdm": "deno -A ./scripts/create-registry-for-backend/mod.ts --dry",
-    "merge-import-maps": "node ./scripts/merge-import-maps.js"
+   // "ai_conf:dev": "cd ./backends/ai-confirmations && deno task dev",
+    //"helloWorld": "echo 'Hello World!'",
+    //"bdm": "deno -A ./scripts/create-registry-for-backend/mod.ts --dry",
+    //"merge-import-maps": "node ./scripts/merge-import-maps.js"
   },
-  "workspace": ["shared/framework", "backends/ai-confirmations", "shared/utilities", "scripts/create-registry-for-backend"]
+  "workspace": ["shared/denomite", "shared/utilities"]
 }
