@@ -955,6 +955,7 @@
       "shared/denomite": {
         "dependencies": [
           "jsr:@dx/reflect@0.2.14",
+          "jsr:@shared/utils@*",
           "jsr:@std/assert@1",
           "jsr:@std/testing@*"
         ]

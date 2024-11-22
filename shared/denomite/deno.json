@@ -12,7 +12,7 @@
     "@std/mock": "jsr:@std/testing/mock",
     "@global_models": "../../models/~index.d.ts",
     "@decorators/": "./core/decorators/",
-    "@utils": "../utilities/mod.ts"
+    "@utils": "jsr:@shared/utils"
   },
  "fmt": {
     "options": {
