@@ -1,11 +1,21 @@
-import "./registry.ts"
-//import "https://deno.land/std@0.153.0/dotenv/load.ts";
-//import "./controllers/nightly-report/bland-input/endpoint.ts"
-//import "@global_models"
-import "./controllers/nightly-report/~index.ts";
-import { RouteTracker } from "@shared/framework/core";
-import { Application, Router } from "https://deno.land/x/oak/mod.ts";
-//import "./registry.ts"
+import './registry.ts'
+import Denomite from "@denomite"
+const { Controller, Dependency } = Denomite
+export { Controller, Dependency }
+const oak = new Denomite.OakAdapter('/ai-conf', 8000)
+const resolver = new Denomite.Resolver()
+const server = new Denomite.Server(oak, resolver)
+server.addMiddleware(async (ctx: any, next: any) => {
+  const url = ctx.request.url
+  console.log(url)
+  next()
+})
+await server.start()
 
 
-await new RouteTracker(Router, Application).start('ai-conf');
+ 
+
+
+///.....................ai-confnightly-report/V001/hello-world"
+//http://localhost:8000/ai-confnightly-report/V001/hello-world"
+//

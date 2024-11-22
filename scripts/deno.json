@@ -1,0 +1,13 @@
+{
+  "name": "@scripts/create-registry",
+  "exports": "./mod.ts",
+  "imports": {
+    "@libs/std": "jsr:@libs/std@^2024.10.5",
+    "@utils": "../shared/utilities/mod.ts"
+  },
+  "tasks": {
+    "dev": "deno run -A --watch mod.ts",
+    "prod": "deno run -A mod.ts"
+  },
+  "tasks": { }
+}

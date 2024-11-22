@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "tasks": {
+    "ai_conf:dev": "cd ./backends/ai-confirmations && deno task dev",
+    "bdm": "deno -A ./scripts/create-registry-for-backend/mod.ts",
+    "serve:backend": "deno -A ./scripts/denomite-serve/mod.ts"
+  },
+  "lint": {
+    "rules": {
+      "exclude": ["*"]
+    }
+  },
+  "workspace": ["shared/denomite", "shared/utilities", "backends/ai-confirmations", "backends/ai-activations", "scripts"]
+}

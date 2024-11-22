@@ -1,9 +1,11 @@
 import { debounce } from "@libs/std";
 
+const project = "ai-confirmations"
+
 const pathsToWatch = ["../../../"]; // Directories to watch for changes
 const debounceMs = 300; // Debounce interval in milliseconds
 const isQuiet = Deno.args.includes("--quiet");
-const bdmCmd = ["deno", "task", "bdm"]
+const bdmCmd = ["deno", "task", "bdm", `--project=${project}`];
 if(isQuiet) bdmCmd.push("--quiet")
 // Runs a command in a given directory
 const runCommand = (from: string, cmd: string[]) => {

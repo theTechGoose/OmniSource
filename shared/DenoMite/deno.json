@@ -8,11 +8,18 @@
     "@reflect": "https://deno.land/x/reflect_metadata@v0.1.12/mod.ts",
     "@std/bdd": "jsr:@std/testing/bdd",
     "@std/mock": "jsr:@std/testing/mock",
-    "@global_models": "../../models/~index.d.ts"
+    "@global_models": "../../models/~index.d.ts",
+    "@decorators/": "./core/decorators/",
+    "@utils": "../utilities/mod.ts"
   },
  "fmt": {
     "options": {
       "useSingleQuote": true
+    }
+  },
+  "lint": {
+    "rules": {
+      "exclude": ["verbatim-module-syntax"]
     }
   },
     "include": ["../../models/~index.d.ts"]

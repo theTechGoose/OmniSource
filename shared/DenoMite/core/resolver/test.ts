@@ -4,11 +4,11 @@ import { ResolverCache } from "./helpers/cache/~mod.ts"; // Adjust the import pa
 import { Reflect } from "@reflect"; // Ensure Reflect is available
 
 let resolver: Resolver;
-let cache: ResolverCache;
+//let cache: ResolverCache;
 
 const setup = () => {
-  cache = new ResolverCache();
-  resolver = new Resolver(cache);
+  //cache = new ResolverCache();
+  resolver = new Resolver();
   resolver.register(TestClass1);
   resolver.register(TestClass2);
   resolver.register(TestClass3);
@@ -44,7 +44,7 @@ Reflect.defineMetadata(
 
 Deno.test("it should have an empty registry", () => {
   const cache = new ResolverCache();
-  resolver = new Resolver(cache)
+  resolver = new Resolver()
   const registry = resolver["registry"];
   assertEquals(registry.length, 0);
 });

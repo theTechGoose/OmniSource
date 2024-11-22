@@ -10,9 +10,21 @@
 //
 //Deno.test("it should load leads from email", async () => {
 //        const {resolver} = Resolver.resolveWithCurrentInstance__Danger__()
-//        resolver.replace('http', MockHttp) 
+//        resolver.replace('http', MockHttp)
 //        const cl = resolver.resolve(BlandInput)
 //        const res = await cl.fromPostmarkLink(json)
 //        const path = import.meta.dirname + '/helpers/data-handler/sample-data/take_two.json'
 // })
 
+class c {
+  testy() {}
+}
+
+
+Deno.test("it should load leads from email", async () => {
+  function a(b = $(c)) {
+    b.testy()
+    return b;
+  }
+  console.log(a.toString());
+});

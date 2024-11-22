@@ -1,1 +1,1 @@
-Deno.test("hello", () =>{})
+Deno.test("hello", () =>)

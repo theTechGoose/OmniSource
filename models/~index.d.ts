@@ -2,3 +2,4 @@
 /// <reference path="./bland.d.ts" />
 /// <reference path="./postmark.d.ts" />
 /// <reference path="./denomite.d.ts" />
+/// <reference path="./core.d.ts" />

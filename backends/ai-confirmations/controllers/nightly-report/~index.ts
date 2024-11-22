@@ -1,5 +1,7 @@
-import {controllerFactory} from '@shared/framework/core';
+import Denomite from "@denomite";
 
-export const NightlyReport = controllerFactory('nightly-report')
-
-
+@Denomite.Controller
+export class NightlyReport extends Denomite.NoAuth {
+  version = "001";
+  "GET /hello-world" = "./bland-input/endpoint-test.ts";
+}

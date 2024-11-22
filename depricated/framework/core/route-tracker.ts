@@ -139,7 +139,6 @@ export class RouteTracker {
           ctx.response.body = { error: authResponse.errors.join(" ") };
           return;
         }
-        console.log({ instance });
 
         const args = _args.length ? await Promise.all(_args) : [ctx];
         const [value, error] = await withTryCatch(async () =>
