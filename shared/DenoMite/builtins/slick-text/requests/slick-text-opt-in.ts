@@ -1,21 +1,23 @@
-import {SlickTextRequest} from '../base-request.ts';
+import { SlickTextRequest } from "../base-request.ts";
 
-export interface slickTextOptInDto { 
-  firstName: string, 
-  lastName: string,
-  phoneNumber: string,
-  email: string,
-  city: string,
-  state: string,
-  zip: string
-}
+const dto = class {
+      firstName!: string;
+      lastName!: string;
+      phoneNumber!: string;
+      email!: string;
+      city!: string;
+      state!: string;
+      zip!: string;
+  }
+
 
 export class SlickTextOptIn extends SlickTextRequest {
+  static interface = dto; 
   type = "POST";
-  route = "/contacts"
-  constructor(public payload: slickTextOptInDto) {
+  route = "/contacts";
+
+  constructor(public payload: InstanceType<typeof dto>) {
     super();
   }
+
 }
-
-

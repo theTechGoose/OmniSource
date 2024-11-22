@@ -1,8 +1,7 @@
-import "https://deno.land/x/reflect_metadata@v0.1.12/mod.ts";
+import { Reflect } from "@reflect";
 import { ResolverCache } from "./helpers/cache/~mod.ts";
 import { Ctx } from "../../builtins/~index.ts";
 import { extractLoadedClasses } from "./helpers/loader/mod.ts";
-import { Reflect } from "@reflect";
 import {dependencies} from '../server/~mod.ts'
 import "@global_models";
 
@@ -59,7 +58,6 @@ export class _Resolver {
 
   getParams(target: FnOrCtr): Array<ConstructorInstance> {
     let paramTypes = Reflect.getMetadata("design:paramtypes", target) || [];
-    console.log({paramTypes, target})
     if (!paramTypes.length) paramTypes = this.paramIdentifier(target);
     return paramTypes.map((dep: Constructor) => {
       const resolved = this.resolve(dep);

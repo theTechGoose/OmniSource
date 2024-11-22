@@ -105,7 +105,7 @@ function buildServeCommand(): string[] {
   const ENV_FILE =
     "/Users/goose/Documents/New_Programing/OmniSource/.env.local";
   const ENTRY_POINT = "main.ts";
-  const base = "deno run --allow-all --unstable";
+  const base = "deno run --allow-all --unstable-kv";
   const ext = `--env-file=${ENV_FILE} ${ENTRY_POINT}`;
   return `${base} ${ext}`.split(" ").filter(Boolean);
 }

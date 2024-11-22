@@ -1,9 +1,10 @@
 import {
   Application,
   Router,
-} from "https://deno.land/x/oak/mod.ts";
+} from "jsr:@oak/oak@17.1.3";
 import type { Endpoint } from "../../../endpoint/~mod.ts";
 import type {Resolver} from '../../../resolver/~mod.ts';
+
 
   export class OakAdapter {
     router = new Router();

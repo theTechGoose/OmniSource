@@ -1,7 +1,8 @@
-import _ from "npm:lodash";
+import _ from "npm:lodash@4.17.21";
+
 import { getStackTrace, camelToKebabCase } from "@utils";
 import {withTryCatch} from '@utils';
-import chalk from "https://deno.land/x/chalk_deno@v4.1.1-deno/source/index.js"
+import chalk from "jsr:@nothing628/chalk@1.0.1"
 
 import { Endpoint } from "../../endpoint/~mod.ts";
 import { addToPrebuildEndpoints } from "../../server/~mod.ts";
@@ -49,7 +50,7 @@ export function Controller(target: any) {
       const cb = handler ? r : j;
       cb({endpoint, error});
     }).catch(({endpoint, error}) => {
-      //@ts-ignore
+      //@ts-ignore: chalk does have this property
       const label = chalk.redBright('[ERROR]');
       console.log(`${label}::Could not load ${path} in ${scrubbedFilePath}\nMsg: ${error.message}`);
       return endpoint

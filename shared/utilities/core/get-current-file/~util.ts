@@ -1,4 +1,4 @@
-import { nanoid } from "npm:nanoid";
+import { nanoid } from "npm:nanoid@5.0.7";
 import {fileURLToPath} from 'node:url';
 
 export function getStackTrace(): FileStack {

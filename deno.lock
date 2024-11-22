@@ -1,8 +1,14 @@
 {
   "version": "4",
   "specifiers": {
+    "jsr:@dx/reflect@*": "0.2.14",
+    "jsr:@dx/reflect@0.2.14": "0.2.14",
     "jsr:@libs/std@^2024.10.5": "2024.10.5",
+    "jsr:@nothing628/chalk@*": "1.0.1",
+    "jsr:@nothing628/chalk@1.0.1": "1.0.1",
     "jsr:@oak/commons@1": "1.0.0",
+    "jsr:@oak/oak@*": "17.1.3",
+    "jsr:@oak/oak@17.1.3": "17.1.3",
     "jsr:@std/archive@0.225.4": "0.225.4",
     "jsr:@std/assert@1": "1.0.8",
     "jsr:@std/assert@1.0.6": "1.0.6",
@@ -79,13 +85,18 @@
     "npm:chalk@*": "5.3.0",
     "npm:glob@*": "11.0.0",
     "npm:lodash@*": "4.17.21",
+    "npm:lodash@4.17.21": "4.17.21",
     "npm:nanoid@*": "5.0.7",
+    "npm:nanoid@5.0.7": "5.0.7",
     "npm:papaparse@*": "5.4.1",
     "npm:path-to-regexp@6.2.1": "6.2.1",
     "npm:reflect-metadata@*": "0.2.2",
     "npm:tsyringe@^4.8.0": "4.8.0"
   },
   "jsr": {
+    "@dx/reflect@0.2.14": {
+      "integrity": "53e1cb54e25170f43d90966679fcd7d6e0d27e23f4f1c869330d339576f446be"
+    },
     "@libs/std@2024.10.5": {
       "integrity": "6044bf9daefc295b6d9d1204cee7353a29117c1ade84f193131cc63406eadb81",
       "dependencies": [
@@ -131,6 +142,9 @@
         "jsr:@std/yaml@1.0.5"
       ]
     },
+    "@nothing628/chalk@1.0.1": {
+      "integrity": "d89ab2f1a9674ce7134b791ea8f53aec728d3e00ad89d08c44785bff342d2ef6"
+    },
     "@oak/commons@1.0.0": {
       "integrity": "49805b55603c3627a9d6235c0655aa2b6222d3036b3a13ff0380c16368f607ac",
       "dependencies": [
@@ -140,6 +154,20 @@
         "jsr:@std/encoding@1",
         "jsr:@std/http@1",
         "jsr:@std/media-types@1"
+      ]
+    },
+    "@oak/oak@17.1.3": {
+      "integrity": "d89296c22db91681dd3a2a1e1fd14e258d0d5a9654de55637aee5b661c159f33",
+      "dependencies": [
+        "jsr:@oak/commons",
+        "jsr:@std/assert@1",
+        "jsr:@std/bytes@1",
+        "jsr:@std/crypto@1",
+        "jsr:@std/http@1",
+        "jsr:@std/io@0.224",
+        "jsr:@std/media-types@1",
+        "jsr:@std/path@1",
+        "npm:path-to-regexp"
       ]
     },
     "@std/archive@0.225.4": {
@@ -926,6 +954,7 @@
       },
       "shared/denomite": {
         "dependencies": [
+          "jsr:@dx/reflect@0.2.14",
           "jsr:@std/assert@1",
           "jsr:@std/testing@*"
         ]

@@ -1,6 +1,9 @@
 {
   "name": "@backends/ai-confirmations",
   "exports": "./main.ts",
+  "version": "0.0.1",
+  "entrypoint": "./main.ts",
+  "license": "MIT",
   "tasks": {
     "dev": "cd ../../ && deno task serve:backend --project=ai-activations --quiet",
     "dev:dry": "deno task dev -- dry",
@@ -28,7 +31,6 @@
     "exclude": [
       "**/node_modules"
     ],
-    "include": ["../../models/~index.d.ts"],
-    "entrypoint": "main.ts"
+    "include": ["../../models/~index.d.ts"]
   }
 }
