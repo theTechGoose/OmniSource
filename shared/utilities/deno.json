@@ -1,5 +1,7 @@
 {
   "name":"@shared/utils",
+  "version": "0.0.1",
+  "license": "MIT",
   "exports": "./mod.ts",
   "tasks": {},
   "imports": {
