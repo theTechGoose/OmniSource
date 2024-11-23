@@ -1,5 +1,5 @@
 import "@global_models";
-import { metadataKeys } from "@constants";
+import {metadataKeys} from "@root/constants.ts";
 import { Reflect } from "@reflect";
 
 interface CacheToken<T extends Constructor = any> {

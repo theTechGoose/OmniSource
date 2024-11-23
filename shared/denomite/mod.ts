@@ -17,5 +17,10 @@ export default {
   NoAuth,
 }
 
+/**
+  * this function runs a thing
+  * @param apple - this is an apple
+  **/
+function test(apple: string) {}
 
 

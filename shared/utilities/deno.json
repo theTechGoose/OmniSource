@@ -1,23 +1,17 @@
 {
-  "name":"@shared/utils",
+  "name": "@shared/utils",
   "version": "0.0.1",
   "license": "MIT",
   "exports": "./mod.ts",
   "tasks": {},
   "imports": {
-    "@std/assert": "jsr:@std/assert@1",
-    "@std/bdd": "jsr:@std/testing/bdd",
-    "@std/mock": "jsr:@std/testing/mock",
-    "@shared": "./shared/~index.ts",
-    "@lib": "./lib/~index.ts",
-    "@logger": "./logger/~index.ts",
-    "tsyringe": "npm:tsyringe@^4.8.0",
-    "@plugins": "./plugins/~index.ts",
-    "@plugins/db": "./plugins/database/plugin.ts",
-    "@plugins/db/models": "./plugins/database/models.ts",
-    "@plugins/db/lib": "./plugins/database/lib/~index.ts"
+    "@core": "./core/.mod.ts",
+    "@arrays": "./arrays/.mod.ts",
+    "@validation": "./validation/.mod.ts",
+    "@higher-order-functions": "./higher-order-functions/.mod.ts",
+    "@string-manipulation": "./string-manipulation/.mod.ts"
   },
- "fmt": {
+  "fmt": {
     "options": {
       "useSingleQuote": true
     }

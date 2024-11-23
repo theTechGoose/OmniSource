@@ -1,3 +1,7 @@
+/**
+  * Converts a camel case string to kebab case.
+  * @param input The camel case string to convert.
+  **/
 export function camelToKebabCase(input: string): string {
     return input
         .replace(/([a-z0-9])([A-Z])/g, "$1-$2") // Add a dash between lower and upper case letters

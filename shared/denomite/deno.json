@@ -1,28 +1,22 @@
 {
-  "name":"@shared/denomite",
+  "name": "@shared/denomite",
   "version": "0.0.1",
   "license": "MIT",
   "exports": "./mod.ts",
   "tasks": {},
   "imports": {
-    "@std/assert": "jsr:@std/assert@1",
-    "@constants": "./constants.ts",
+    "@root/": "./",
     "@reflect": "jsr:@dx/reflect@0.2.14",
-    "@std/bdd": "jsr:@std/testing/bdd",
-    "@std/mock": "jsr:@std/testing/mock",
-    "@global_models": "../../models/~index.d.ts",
     "@decorators/": "./core/decorators/",
-    "@utils": "jsr:@shared/utils"
+    "@core/": "./core/",
+    "@builtins": "./builtins/"
   },
- "fmt": {
+  "fmt": {
     "options": {
       "useSingleQuote": true
     }
   },
-  "lint": {
-    "rules": {
-      "exclude": ["verbatim-module-syntax"]
-    }
-  },
-    "include": ["../../models/~index.d.ts"]
+  "include": [
+    "../../models/~index.d.ts"
+  ]
 }

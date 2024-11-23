@@ -931,6 +931,10 @@
     "https://esm.sh/v135/parse5@7.1.2/denonext/parse5.mjs": "35bb04ec36a1c25c8cd8137296d64d16fd523a8ad1c2b63c41ba867fcd455c36"
   },
   "workspace": {
+    "dependencies": [
+      "jsr:@std/assert@1",
+      "jsr:@std/testing@*"
+    ],
     "members": {
       "backends/ai-activations": {
         "dependencies": [
@@ -954,17 +958,7 @@
       },
       "shared/denomite": {
         "dependencies": [
-          "jsr:@dx/reflect@0.2.14",
-          "jsr:@shared/utils@*",
-          "jsr:@std/assert@1",
-          "jsr:@std/testing@*"
-        ]
-      },
-      "shared/utilities": {
-        "dependencies": [
-          "jsr:@std/assert@1",
-          "jsr:@std/testing@*",
-          "npm:tsyringe@^4.8.0"
+          "jsr:@dx/reflect@0.2.14"
         ]
       }
     }

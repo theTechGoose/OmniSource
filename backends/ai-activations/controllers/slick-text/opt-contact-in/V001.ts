@@ -1,10 +1,10 @@
 import { Postmark } from "@denomite/builtins/postmark/~plugin.ts";
 import { SlickText } from "@denomite/builtins/slick-text/mod.ts";
 import {I} from '@denomite/builtins/utils/interface.ts'
-import { $ } from "@denomite/loader";
+import { λ } from "@denomite/loader";
 type OptIn = I<typeof SlickText.interfaces.OptIn>
 
-export default async function (pm = $(Postmark), st = $(SlickText)) {
+export default async function (pm = λ(Postmark), st = λ(SlickText)) {
   const email = pm.getInboundEmail<OptIn>();
   const parser = email.attachments.get(0);
   const csv = parser.asCSV();
