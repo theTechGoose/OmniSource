@@ -47,7 +47,7 @@ export async function onGitPush(ctx: Context) {
   if (branch !== "x-deploy") return;
   const process = await pull(branch);
   await process.status;
-  await prodRun.stop();
+  await killOtherDenoProcesses()
   await sleep(1000)
 
 
@@ -64,4 +64,47 @@ export function parseGitBody(body: string): GithubPushHook {
   const payloadObject = JSON.parse(payloadDecoded);
   return payloadObject;
 }
+
+
+async function killOtherDenoProcesses() {
+  // Get the current process ID
+  const currentPid = Deno.pid;
+
+  // Use `Deno.Command` to list all processes
+  const command = new Deno.Command("ps", {
+    args: ["-eo", "pid,comm"],
+    stdout: "piped", // Capture standard output
+    stderr: "piped", // Capture standard error
+  });
+
+  // Run the command and capture its output
+  const { stdout } = await command.output();
+
+  // Decode the output to a string
+  const decoder = new TextDecoder();
+  const processList = decoder.decode(stdout);
+
+  // Find all Deno processes
+  const denoProcesses = processList
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line.includes("deno"))
+    .map((line) => {
+      const [pid] = line.split(/\s+/); // Extract PID
+      return parseInt(pid, 10);
+    })
+    .filter((pid) => pid !== currentPid); // Exclude the current process
+
+  // Kill other Deno processes
+  for (const pid of denoProcesses) {
+    try {
+      Deno.kill(pid, "SIGKILL"); // Terminate the process
+      console.log(`Killed Deno process with PID: ${pid}`);
+    } catch (err: any) {
+      console.error(`Failed to kill PID ${pid}:`, err.message);
+    }
+  }
+  return
+}
+
 
