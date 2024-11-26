@@ -29,7 +29,7 @@ class ProdRun {
   }
 
   stop() {
-    this.process?.then((process) => {
+    return this.process?.then((process) => {
       process.kill();
       this.process = undefined;
     });
@@ -47,8 +47,8 @@ export async function onGitPush(ctx: Context) {
   if (branch !== "x-deploy") return;
   const process = await pull(branch);
   await process.status;
+  await prodRun.stop();
   await sleep(1000)
-  prodRun.stop();
   prodRun.start();
 }
 
