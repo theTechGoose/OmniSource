@@ -1,3 +1,5 @@
+export type Constructor<T = any> = new (...args: any[]) => T;
+export type ExtendedConstructor = Constructor & {id: string};
 
 // INTERFACE MUST BE STATIC
 // T MUST BE PASSED AS "TYPEOF"
@@ -44,6 +46,4 @@ export interface LoaderFn<T> {
   }
 }
 
-type Constructor<T = any> = new (...args: any[]) => T;
-export type ExtendedConstructor = Constructor & {id: string};
 

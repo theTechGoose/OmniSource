@@ -6,7 +6,7 @@ const headers = {
 };
 
 export abstract class SlickTextRequest extends Request {
-  protected baseUrl = baseUrl;
+  override baseUrl = baseUrl;
   headers = headers;
  checkRateLimit(responseHeaders: any) {
   const rateLimitRemaining = +responseHeaders["X-RateLimit-Remaining"];

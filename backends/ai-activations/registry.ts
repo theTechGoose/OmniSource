@@ -1,1 +1,1 @@
-export * from "./controllers/slick-text/config.ts";
+export * from "./controllers/booksi-act-text/config.ts";

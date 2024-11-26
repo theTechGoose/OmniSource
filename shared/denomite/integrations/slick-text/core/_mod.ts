@@ -11,6 +11,8 @@ export class SlickText {
     OptIn: SlickTextOptIn
   }
 
+  constructor(private http: Http) {}
+
   private async runRequest(req: SlickTextRequest) {
     const axiosRequest = await this.http.request(req)
     if(!axiosRequest) throw new Error(`axios request failed`)
@@ -19,7 +21,6 @@ export class SlickText {
     return axiosRequest.data;
   }
 
-  constructor(private http: Http) {}
 
   optIn(dto: InstanceType<typeof OptInDto>) {
     const req = new SlickTextOptIn(dto);

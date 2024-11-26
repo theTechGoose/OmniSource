@@ -1,5 +1,5 @@
 import { nanoid } from "#nanoid";
-import {IPreparedDependency, IDependencyManifest} from "@root/models.ts";
+import {IPreparedDependency, IDependencyManifest, ExtendedConstructor, Constructor} from "@root/models.ts";
 
 export class PreparedDependency implements IPreparedDependency {
   readonly id: string

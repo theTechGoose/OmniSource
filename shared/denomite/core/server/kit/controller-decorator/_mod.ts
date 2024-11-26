@@ -1,6 +1,7 @@
 import { createFunclet, camelToKebabCase } from "@shared/utils";
 import {resolve} from "node:path";
 import { IParsedEndpoint } from "../../models.ts";
+import { Constructor } from "@root/models.ts";
 
 interface LocalVaultType {
   endpoints: IParsedEndpoint[];

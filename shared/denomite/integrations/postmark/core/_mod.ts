@@ -1,4 +1,3 @@
-import "@global_models"
 import { Dependency } from "@root/core/resolution/_mod.ts";
 import { InboundEmail } from "../kit/inbound-email.ts";
 export * from "../kit/inbound-email.ts"

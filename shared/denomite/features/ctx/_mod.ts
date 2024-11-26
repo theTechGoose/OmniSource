@@ -7,7 +7,7 @@ export class OakCtx {
   id = "r4LDIFMpxsLu3xjDvicHI"
   body!: ReturnType<Context["request"]["body"]["json"]>;
   constructor(public root: Context) {
-    if (!root.request.hasBody) return;
+    if (!root?.request?.hasBody) return;
     this.body = root.request.body.json();
   }
 }

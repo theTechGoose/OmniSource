@@ -1,5 +1,6 @@
 import {createFunclet} from "@shared/utils";
 import {DependencyManifest} from "../dependency/_mod.ts";
+import { Constructor, ExtendedConstructor } from "@root/models.ts";
 
 const manifest = new DependencyManifest();
 

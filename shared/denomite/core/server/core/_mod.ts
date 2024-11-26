@@ -1,4 +1,4 @@
-import { AdapterInstance, Middleware } from "@root/models.ts";
+import { AdapterInstance, Constructor, Middleware } from "@root/models.ts";
 import { ServerPlugin } from "@root/core/server/kit/server-plugin/_mod.ts";
 import { Controller } from "../kit/controller-decorator/_mod.ts";
 import { IParsedEndpoint } from "@root/core/server/models.ts";

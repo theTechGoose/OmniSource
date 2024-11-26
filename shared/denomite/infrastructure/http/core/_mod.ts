@@ -1,5 +1,5 @@
-import '@global_models';
 import { Logger } from "@root/features/logger/core/_mod.ts";
+import {withTryCatch} from "@shared/utils";
 import axios, {AxiosError, AxiosRequestConfig, type AxiosResponse} from 'npm:axios';
 import {Request} from '../_base.ts'
 import {Dependency} from '@root/core/resolution/_mod.ts';
@@ -24,24 +24,28 @@ export class Http {
   } 
 
   private handleSuccess(res: AxiosResponse) {
+    const [payload] = withTryCatch(() => JSON.parse(res.config.data))
     this.logger.debug(`Request was successful`, { 
       url: res.config.url,
       status: res.status,
       headers: res.headers,
-      payload: res.config.data,
+      payload,
       response: res.data
     });
     return res
 }
 
+// 
   private handleError(err: AxiosError) {
     if(!err) throw new Error(`axios threw an error but did not get an error in handler`)
     const {config, response} = err;
     if(!config) throw new Error(`axios error did not have a config object`)
+    const [payload] = withTryCatch(() => JSON.parse(config.data))
     this.logger.error(`Request failed`, {
       url: config.url,
       status: response?.status,
-      payload: config.data,
+      payload,
+      requestHeaders: config.headers,
       responseHeaders: response?.headers,
       responseData: err.response?.data
     });

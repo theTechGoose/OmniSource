@@ -1,0 +1,12 @@
+
+{
+  "name":"@backends/local-server",
+  "exports": "./core/_mod.ts",
+  "tasks": {
+    "dev": "deno run -A --watch ./core/_mod.ts"
+  },
+  "imports": {
+    "@endpoints": "./kit/endpoints/_mod.ts",
+    "#date-fns": "npm:date-fns"
+  }
+}
