@@ -5,6 +5,7 @@ const __dirname = import.meta.dirname
 if(!__dirname) throw new Error('dirname not found')
 const server = new Server(__dirname, adapter)
 server.registerPlugin(Plugins.StandardPlugin)
+console.log("DOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOKS")
 await server.start()
 
 //import { Application, Router } from "#oak";
