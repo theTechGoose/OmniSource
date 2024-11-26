@@ -15,4 +15,5 @@ export async function onGitPush(ctx: Context) {
 
 
 logger.log(TAG,'git push data', body)
+logger.log(TAG, 'body.zen')
 }
