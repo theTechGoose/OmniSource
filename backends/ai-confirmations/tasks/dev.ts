@@ -139,6 +139,7 @@ handleChange(); // Initial run
 console.log("Watching for changes...");
 for await (const _ of Deno.watchFs(pathsToWatch)) {
   //
+  //
 
   handleChange();
 }
