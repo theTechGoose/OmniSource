@@ -1,5 +1,22 @@
 # Denomite
 
+
+folder structure
+- module-name   #use the module name
+  - core        #main logic
+    - mod.ts    #Base class or logic goes here
+    - test.ts      # Testing base class
+  - helpers/    #concrete implementations or helpers
+  - models.ts       # Shared
+  - test.ts         
+  - mod.ts  
+
+
+
+
+
+
+
 ## Overview
 This library provides a modular and extensible framework for handling server-side functionality, integrations, and shared utilities.
 

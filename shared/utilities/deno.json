@@ -5,11 +5,11 @@
   "exports": "./mod.ts",
   "tasks": {},
   "imports": {
-    "@core": "./core/.mod.ts",
-    "@arrays": "./arrays/.mod.ts",
-    "@validation": "./validation/.mod.ts",
-    "@higher-order-functions": "./higher-order-functions/.mod.ts",
-    "@string-manipulation": "./string-manipulation/.mod.ts"
+    "@core": "./core/_mod.ts",
+    "@arrays": "./arrays/_mod.ts",
+    "@validation": "./validation/_mod.ts",
+    "@higher-order-functions": "./higher-order-functions/_mod.ts",
+    "@string-manipulation": "./string-manipulation/_mod.ts"
   },
   "fmt": {
     "options": {

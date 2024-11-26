@@ -10,7 +10,7 @@ export function chkProps(obj: any, ...props: Array<string>): boolean {
   const propChecker = new PropChecker(obj);
   propChecker.checkIfTruthy();
   propChecker.checkIfObject()
-  return props.every(propChecker.check);
+  return props.every(propChecker.check.bind(propChecker));
 }
 
 /**

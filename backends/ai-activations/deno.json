@@ -6,8 +6,8 @@
   "license": "MIT",
   "tasks": {
     "dev": "cd ../../ && deno task serve:backend --project=ai-activations --quiet",
-    "dev:dry": "deno task dev -- dry",
     "tunnel": "./tasks/tunnel.sh",
+    "dev:dry": "deno task dev -- dry",
     "emulate": "./tasks/emulate.sh"
   },
   "imports": {

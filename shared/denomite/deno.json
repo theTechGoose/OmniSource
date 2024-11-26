@@ -2,21 +2,35 @@
   "name": "@shared/denomite",
   "version": "0.0.1",
   "license": "MIT",
-  "exports": "./mod.ts",
+  "exports": {
+    ".": "./_mod.ts",
+    "./integrations/postmark": "./integrations/postmark/_mod.ts",
+    "./integrations/slick-text": "./integrations/slick-text/_mod.ts",
+    "./features/auth": "./features/auth/_mod.ts"
+  },
   "tasks": {},
   "imports": {
     "@root/": "./",
-    "@reflect": "jsr:@dx/reflect@0.2.14",
     "@decorators/": "./core/decorators/",
     "@core/": "./core/",
-    "@builtins": "./builtins/"
+    "@builtins": "./builtins/",
+    "@models": "./models.ts",
+    "@shared/denomite/integrations/": "./integrations/",
+    "#reflect": "jsr:@dx/reflect@0.2.14"
+  },
+  "lint": {
+    "rules": {
+      "exclude": [
+        "verbatim-module-syntax",
+        "no-prototype-builtins",
+        "ban-types",
+        "import-map-remap"
+      ]
+    }
   },
   "fmt": {
     "options": {
       "useSingleQuote": true
     }
-  },
-  "include": [
-    "../../models/~index.d.ts"
-  ]
+  }
 }

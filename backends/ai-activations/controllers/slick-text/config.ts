@@ -1,7 +1,7 @@
-import Denomite from "@denomite";
+import {NoAuth, Controller} from "@shared/denomite";
 
-@Denomite.Controller
-export class SlickText extends Denomite.NoAuth {
-  version = "001";
-  "GET /opt-in" = "./opt-contact-in/v001.ts";
+@Controller
+export class SlickTextV001 extends NoAuth {
+  "POST /opt-in" = "./opt-contact-in/V001.ts";
 }
+

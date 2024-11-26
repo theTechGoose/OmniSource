@@ -10,8 +10,8 @@ type Funclet<V, F extends (...args: any[]) => any> = F & {
   * It can be used to store data that the function needs to access.
   **/
 export function createFunclet<V, F extends (...args: any[]) => any>(
-  fn: F,
   vault: V,
+  fn: F,
 ): Funclet<V, F> {
   const funclet = fn as Funclet<V, F>;
   funclet.vault = vault;
