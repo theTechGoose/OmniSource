@@ -43,6 +43,7 @@ export async function onGitPush(ctx: Context) {
   ctx.response.status = 200;
   ctx.response.body = { message: "ok" };
   console.log("branch", branch);
+  //
   if (branch !== "x-deploy") return;
   const process = await pull(branch);
   await process.status;
