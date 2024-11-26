@@ -10,10 +10,10 @@ export async function onGitPush(ctx: Context) {
    // @ts-ignore
   acc[key] = value
   return acc
- }, {})
+ }, {} as any)
 
 
 
 logger.log(TAG,'git push data', body)
-logger.log(TAG, 'body.zen')
+logger.log(TAG, body.zen)
 }
