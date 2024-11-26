@@ -4,11 +4,13 @@ import { GithubPushHook } from "./models.ts";
 
 
 export async function run(cmd: string, ...args: Array<string>) {
+  const cwd = git.root();
+  console.log(`Running command: ${cmd} ${args.join(" ")}`);
   const command = new Deno.Command(cmd, {
     args: args,
     stdout: "inherit",
     stderr: "inherit",
-    cwd: git.root(),
+    cwd
   });
   const childProcess = command.spawn();
   return childProcess;
