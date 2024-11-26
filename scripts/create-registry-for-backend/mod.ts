@@ -3,6 +3,10 @@ import json from '../../deno.json' with { type: 'json' };
 
 const controllerFilePattern = 'config.ts'
 
+const registryPattern = /registry.ts/;
+const gitPattern = /git/;
+const filter = [registryPattern, gitPattern]
+
 
 const isDry = Deno.args.includes("--dry");
 const isQuiet = Deno.args.includes("--quiet");

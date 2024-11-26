@@ -4,7 +4,7 @@ const project = "ai-activations";
 
 const pathsToWatch = ["../../../"]; // Directories to watch for changes
 const registryPattern = /registry.ts/;
-const gitPattern = /.git/;
+const gitPattern = /git/;
 const filter = [registryPattern, gitPattern]
 
 const debounceMs = 300; // Debounce interval in milliseconds
@@ -148,7 +148,7 @@ console.log("Watching for changes...");
 for await (const event of Deno.watchFs(pathsToWatch)) {
   const rawPath = event.paths[0];
   const isFiltered = filter.some(f => f.test(rawPath));
-  const test = registryPattern.test(rawPath);
+  console.log(isFiltered)
   if (isFiltered) continue;
   handleChange(rawPath);
 }
