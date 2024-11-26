@@ -1,12 +1,12 @@
+import {getArg} from "@shared/utils";
 import { debounce } from "@libs/std";
-import { sleep } from "@utils";
 import json from "../../deno.json" with { type: "json" };
 
-  const ENV_FILE_BASE =
-    "/Users/goose/Documents/New_Programing/OmniSource/.env";
+const ENV_FILE_BASE = "/Users/goose/Documents/New_Programing/OmniSource/.env";
 
-const project =
-  Deno.args.find((a) => a.startsWith("--project="))?.split("=")[1] ?? "err";
+const project = getArg("project");
+const port = getArg("port");
+
 const allProjects = json.workspace.map((p: string) => p.split("/")[1]).filter(
   Boolean,
 );
@@ -15,10 +15,8 @@ if (!allProjects.includes(project)) {
   throw new Error(`Project ${project} not found`);
 }
 
-const isProd = Deno.args.includes("--prod")
+const isProd = Deno.args.includes("--prod");
 const ENV_FILE = isProd ? `${ENV_FILE_BASE}.prod` : `${ENV_FILE_BASE}.local`;
-
-
 
 const pathsToWatch = ["../../"]; // Directories to watch for changes
 const registryPattern = /registry.ts/;
@@ -37,8 +35,8 @@ const runCommand = (from: string, cmd: string[]) => {
     env: {
       ...Deno.env.toObject(), // Preserve existing environment variables
       DENONOWARN: "experimentalDecorators",
-      FORCE_COLOR: '1', // Ensure this is correctly set
-      TERM: 'xterm-256color',
+      FORCE_COLOR: "1", // Ensure this is correctly set
+      TERM: "xterm-256color",
     },
   });
   const process = command.spawn();
@@ -112,7 +110,7 @@ function getGitRoot(): string {
 function buildServeCommand(): string[] {
   const ENTRY_POINT = "main.ts";
   const base = "deno run --allow-all --unstable-kv";
-  const ext = `--env-file=${ENV_FILE} ${ENTRY_POINT}`;
+  const ext = `--env-file=${ENV_FILE} ${ENTRY_POINT} --port=${port}`;
   return `${base} ${ext}`.split(" ").filter(Boolean);
 }
 
@@ -141,8 +139,15 @@ const handleChange = debounce(async (path: string) => {
     `${root}/backends/${project}`,
     buildServeCommand(),
   );
+
+  const exposeCmd = `ngrok http --domain=omnisource.ngrok.dev ${port}`.split(
+    " ",
+  );
+  const expose = await runCommand(".", exposeCmd);
+
   runningProcesses.add(build);
   runningProcesses.add(serve);
+  runningProcesses.add(expose);
 
   const origin = path === "Startup" ? "Startup" : path.split("OmniSource")[1];
   const formatted = `${origin} `;
@@ -163,6 +168,6 @@ for await (const event of Deno.watchFs(pathsToWatch)) {
   const rawPath = event.paths[0];
   const test = registryPattern.test(rawPath);
   if (test) continue;
-  if(rawPath.includes('git')) continue;
+  if (rawPath.includes("git")) continue;
   handleChange(rawPath);
 }

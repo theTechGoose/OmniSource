@@ -1,13 +1,14 @@
-import { Postmark } from "@shared/denomite/integrations/postmark";
-import { SlickText } from "@shared/denomite/integrations/slick-text";
-import { λ } from "@shared/denomite";
+import { Bland } from "@shared/denomite/integrations/bland";
+import { OakCtx, λ } from "@shared/denomite";
 
-export default async function (pm = λ(Postmark), st = λ(SlickText)) {
-  type OptIn = InstanceType<typeof SlickText.interfaces.OptIn['interface']>;
-  const email = await pm.getInboundEmail<OptIn>();
-  const parser = email.attachments.get(0);
-  const csv = parser.asCSV();
-  for(const row of csv) {
-    await st.optIn(row);
-  }
+export default async function (bland = λ(Bland), ctx = λ(OakCtx)) {
+  const body = await ctx.body
+  const phone_number = body.phone_number;
+  const pathway_id = "034bf0f2-8f3f-4bb0-90d8-6f74a9683f80";
+  await bland.sendCall({
+    pathway_id,
+    from: "+18432795984",
+    phone_number,
+    max_duration: 5,
+  });
 }

@@ -1,6 +1,8 @@
 import './registry.ts'
+import {getArg} from "@shared/utils";
+const port = getArg('port')
 import {Server, Plugins, OakAdapter, λ} from "@shared/denomite";
-const adapter = new OakAdapter('/ai-act', 8000, λ.vault.manifest)
+const adapter = new OakAdapter('/ai-act', +port, λ.vault.manifest)
 const __dirname = import.meta.dirname
 if(!__dirname) throw new Error('dirname not found')
 const server = new Server(__dirname, adapter)

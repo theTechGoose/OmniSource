@@ -6,6 +6,7 @@
     ".": "./_mod.ts",
     "./integrations/postmark": "./integrations/postmark/_mod.ts",
     "./integrations/slick-text": "./integrations/slick-text/_mod.ts",
+    "./integrations/bland": "./integrations/bland/_mod.ts",
     "./features/auth": "./features/auth/_mod.ts"
   },
   "tasks": {},

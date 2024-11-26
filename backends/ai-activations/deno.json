@@ -5,7 +5,7 @@
   "entrypoint": "./main.ts",
   "license": "MIT",
   "tasks": {
-    "dev": "cd ../../ && deno task serve:backend --project=ai-activations --quiet",
+    "dev": "cd ../../ && deno task serve:backend --project=ai-activations --quiet --port=8000",
     "prod": "concurrently 'deno -A main.ts' 'ngrok http --domain=ai-act.ngrok.io 8000'",
 
     "tunnel": "./tasks/tunnel.sh",
