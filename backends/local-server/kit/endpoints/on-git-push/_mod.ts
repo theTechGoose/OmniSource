@@ -1,21 +1,60 @@
 import { Context } from "#oak";
-import {GithubPushHook} from "./models.ts";
-import {parse} from "node:querystring";
-import { logger } from "../../../core/logger_init.ts";
-const TAG = 'git-push'
+import git from "npm:git-rev-sync";
+import { GithubPushHook } from "./models.ts";
 
-
-export async function onGitPush(ctx: Context) {
-  const body = parseGitBody(await ctx.request.body.text())
-  logger.log(TAG, body.ref)
-
-  //change on develop
-  
+export async function run(cmd: string, ...args: Array<string>) {
+  const command = new Deno.Command(cmd, {
+    args: args,
+    stdout: "inherit",
+    stderr: "inherit",
+    cwd: git.root(),
+  });
+  const childProcess = command.spawn();
+  return childProcess;
 }
 
-export function parseGitBody(body: string):GithubPushHook  {
-const [_, payloadEncoded] = body.match(/payload=([^ ]+)/) ?? [];
-const payloadDecoded = decodeURIComponent(payloadEncoded);
-const payloadObject = JSON.parse(payloadDecoded);
-return payloadObject;
+export function pull(branch: string) {
+  return run("git", "pull", "origin", branch);
+}
+
+class ProdRun {
+  process: Promise<Deno.ChildProcess> | undefined;
+  cmd = [] as Array<string>;
+  constructor(...cmd: Array<string>) {
+    this.cmd = cmd;
+  }
+  start() {
+    this.process = run(this.cmd[0], ...this.cmd.slice(1));
+  }
+
+  stop() {
+    this.process?.then((process) => {
+      process.kill();
+      this.process = undefined;
+    });
+  }
+}
+
+const prodRun = new ProdRun('deno', 'task', 'prod');
+export async function onGitPush(ctx: Context) {
+  const body = parseGitBody(await ctx.request.body.text());
+  const branch = getBranch(body.ref);
+  ctx.response.status = 200;
+  ctx.response.body = { message: "ok" };
+  if (branch !== "x-deploy") return;
+  const process = await pull(branch);
+  await process.status;
+  prodRun.stop();
+  prodRun.start();
+}
+
+export function getBranch(ref: string) {
+  return ref.split("/").pop();
+}
+
+export function parseGitBody(body: string): GithubPushHook {
+  const [_, payloadEncoded] = body.match(/payload=([^ ]+)/) ?? [];
+  const payloadDecoded = decodeURIComponent(payloadEncoded);
+  const payloadObject = JSON.parse(payloadDecoded);
+  return payloadObject;
 }
