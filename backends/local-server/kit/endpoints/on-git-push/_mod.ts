@@ -4,7 +4,6 @@ import { GithubPushHook } from "./models.ts";
 
 export async function run(cmd: string, ...args: Array<string>) {
   const cwd = getGitRoot();
-  console.log(`Running command: ${cmd} ${args.join(" ")}`);
   const command = new Deno.Command(cmd, {
     args: args,
     stdout: "inherit",
@@ -43,6 +42,7 @@ export async function onGitPush(ctx: Context) {
   const branch = getBranch(body.ref);
   ctx.response.status = 200;
   ctx.response.body = { message: "ok" };
+  console.log("branch", branch);
   if (branch !== "x-deploy") return;
   const process = await pull(branch);
   await process.status;
