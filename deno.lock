@@ -97,6 +97,7 @@
     "npm:axios@*": "1.7.7",
     "npm:chalk@*": "5.3.0",
     "npm:date-fns@*": "4.1.0",
+    "npm:find-git-root@*": "1.0.4",
     "npm:git-rev-sync@*": "3.0.2",
     "npm:glob-to-regexp@~0.4.1": "0.4.1",
     "npm:glob@*": "11.0.0",
@@ -563,6 +564,9 @@
     },
     "escape-string-regexp@1.0.5": {
       "integrity": "sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg=="
+    },
+    "find-git-root@1.0.4": {
+      "integrity": "sha512-468fmirKKgcrqfZfPn0xIpwZUUsZQcYXfx0RC2/jX39GPz83TwutQNZZhDrI6HqjO8cRejxQVaUY8GQdXopFfA=="
     },
     "follow-redirects@1.15.9": {
       "integrity": "sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ=="

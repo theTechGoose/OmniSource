@@ -1,16 +1,15 @@
 import { Context } from "#oak";
-import git from "npm:git-rev-sync";
+import { execSync } from "node:child_process";
 import { GithubPushHook } from "./models.ts";
 
-
 export async function run(cmd: string, ...args: Array<string>) {
-  const cwd = git.root();
+  const cwd = getGitRoot();
   console.log(`Running command: ${cmd} ${args.join(" ")}`);
   const command = new Deno.Command(cmd, {
     args: args,
     stdout: "inherit",
     stderr: "inherit",
-    cwd
+    cwd,
   });
   const childProcess = command.spawn();
   return childProcess;
@@ -38,7 +37,7 @@ class ProdRun {
   }
 }
 
-const prodRun = new ProdRun('deno', 'task', 'prod');
+const prodRun = new ProdRun("deno", "task", "prod");
 export async function onGitPush(ctx: Context) {
   const body = parseGitBody(await ctx.request.body.text());
   const branch = getBranch(body.ref);
@@ -60,4 +59,16 @@ export function parseGitBody(body: string): GithubPushHook {
   const payloadDecoded = decodeURIComponent(payloadEncoded);
   const payloadObject = JSON.parse(payloadDecoded);
   return payloadObject;
+}
+
+function getGitRoot() {
+  const gitRoot = execSync("git rev-parse --show-toplevel", {
+    encoding: "utf8",
+  }).trim();
+  if (!gitRoot) {
+    throw new Error(
+      "Failed to locate Git root. Ensure you're in a Git repository.",
+    );
+  }
+  return gitRoot;
 }
