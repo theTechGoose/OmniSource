@@ -7,6 +7,7 @@
   "tasks": {
     "dev": "cd ../../ && deno task serve:backend --project=ai-activations --quiet",
     "prod": "concurrently 'deno -A main.ts' 'ngrok http --domain=ai-act.ngrok.io 8000'",
+
     "tunnel": "./tasks/tunnel.sh",
     "dev:dry": "deno task dev -- dry",
     "emulate": "./tasks/emulate.sh"
