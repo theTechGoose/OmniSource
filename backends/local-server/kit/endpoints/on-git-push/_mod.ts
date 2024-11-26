@@ -5,16 +5,6 @@ const TAG = 'git-push'
 
 
 export async function onGitPush(ctx: Context) {
- const parsedBody = await ctx.request.body.formData()
- const body = Array.from(parsedBody).reduce((acc, [key, value]) => {
-   // @ts-ignore
-  acc[key] = value
-  return acc
- }, {} as any)
-
-
-
-
-logger.log(TAG,'git push data', body)
-logger.log(TAG, body.ref)
+  const body = await ctx.request.body
+  logger.log(TAG, await body.text())
 }
