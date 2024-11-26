@@ -6,6 +6,7 @@
   "license": "MIT",
   "tasks": {
     "dev": "cd ../../ && deno task serve:backend --project=ai-activations --quiet",
+    "prod": "cd ../../ && deno task serve:backend --project=ai-activations --prod --quiet",
     "tunnel": "./tasks/tunnel.sh",
     "dev:dry": "deno task dev -- dry",
     "emulate": "./tasks/emulate.sh"

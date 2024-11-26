@@ -1,5 +1,5 @@
 import { Context } from "#oak";
-import { execSync } from "node:child_process";
+import {sleep, getGitRoot} from "@shared/utils";
 import { GithubPushHook } from "./models.ts";
 
 export async function run(cmd: string, ...args: Array<string>) {
@@ -47,6 +47,7 @@ export async function onGitPush(ctx: Context) {
   if (branch !== "x-deploy") return;
   const process = await pull(branch);
   await process.status;
+  await sleep(1000)
   prodRun.stop();
   prodRun.start();
 }
@@ -62,14 +63,3 @@ export function parseGitBody(body: string): GithubPushHook {
   return payloadObject;
 }
 
-function getGitRoot() {
-  const gitRoot = execSync("git rev-parse --show-toplevel", {
-    encoding: "utf8",
-  }).trim();
-  if (!gitRoot) {
-    throw new Error(
-      "Failed to locate Git root. Ensure you're in a Git repository.",
-    );
-  }
-  return gitRoot;
-}

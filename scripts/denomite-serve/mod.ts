@@ -2,6 +2,9 @@ import { debounce } from "@libs/std";
 import { sleep } from "@utils";
 import json from "../../deno.json" with { type: "json" };
 
+  const ENV_FILE_BASE =
+    "/Users/goose/Documents/New_Programing/OmniSource/.env";
+
 const project =
   Deno.args.find((a) => a.startsWith("--project="))?.split("=")[1] ?? "err";
 const allProjects = json.workspace.map((p: string) => p.split("/")[1]).filter(
@@ -11,6 +14,11 @@ if (project === "err") throw new Error("No project name provided");
 if (!allProjects.includes(project)) {
   throw new Error(`Project ${project} not found`);
 }
+
+const isProd = Deno.args.includes("--prod")
+const ENV_FILE = isProd ? `${ENV_FILE_BASE}.prod` : `${ENV_FILE_BASE}.local`;
+
+
 
 const pathsToWatch = ["../../"]; // Directories to watch for changes
 const registryPattern = /registry.ts/;
@@ -102,8 +110,6 @@ function getGitRoot(): string {
 
 // Builds the serve command
 function buildServeCommand(): string[] {
-  const ENV_FILE =
-    "/Users/goose/Documents/New_Programing/OmniSource/.env.local";
   const ENTRY_POINT = "main.ts";
   const base = "deno run --allow-all --unstable-kv";
   const ext = `--env-file=${ENV_FILE} ${ENTRY_POINT}`;
