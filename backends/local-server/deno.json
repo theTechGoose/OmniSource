@@ -8,6 +8,7 @@
   },
   "imports": {
     "@endpoints": "./kit/endpoints/_mod.ts",
+    "@test-data/": "./test-data/",
     "#date-fns": "npm:date-fns"
   }
 }
