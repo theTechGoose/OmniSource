@@ -138,5 +138,6 @@ const runningProcesses: Set<ReturnType<Deno.Command["spawn"]>> = new Set();
 handleChange(); // Initial run
 console.log("Watching for changes...");
 for await (const _ of Deno.watchFs(pathsToWatch)) {
+
   handleChange();
 }

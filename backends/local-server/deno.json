@@ -6,6 +6,7 @@
     "dev": "deno run -A --watch ./core/_mod.ts",
     "prod": "./tasks/prod.sh"
   },
+
   "imports": {
     "@endpoints": "./kit/endpoints/_mod.ts",
     "@test-data/": "./test-data/",
