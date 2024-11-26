@@ -10,6 +10,7 @@
     "tunnel": "./tasks/tunnel.sh",
     "dev:dry": "deno task dev -- dry",
     "emulate": "./tasks/emulate.sh"
+
   },
   "imports": {
     "@libs/std": "jsr:@libs/std@^2024.10.5",
