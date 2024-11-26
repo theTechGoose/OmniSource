@@ -3,7 +3,8 @@
   "name":"@backends/local-server",
   "exports": "./core/_mod.ts",
   "tasks": {
-    "dev": "deno run -A --watch ./core/_mod.ts"
+    "dev": "deno run -A --watch ./core/_mod.ts",
+    "prod": "./tasks/prod.sh"
   },
   "imports": {
     "@endpoints": "./kit/endpoints/_mod.ts",
