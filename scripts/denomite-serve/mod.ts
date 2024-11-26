@@ -163,5 +163,6 @@ for await (const event of Deno.watchFs(pathsToWatch)) {
   const rawPath = event.paths[0];
   const test = registryPattern.test(rawPath);
   if (test) continue;
+  if(rawPath.includes('git')) continue;
   handleChange(rawPath);
 }

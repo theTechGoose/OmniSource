@@ -148,8 +148,7 @@ console.log("Watching for changes...");
 for await (const event of Deno.watchFs(pathsToWatch)) {
   const rawPath = event.paths[0];
   const isFiltered = filter.some(f => f.test(rawPath));
-  console.log(isFiltered)
   if (isFiltered) continue;
-  //if(rawPath.includes("git") rawPath.) continue;
-  //handleChange(rawPath);
+  if(rawPath.includes("git")) continue;
+  handleChange(rawPath);
 }
