@@ -6,8 +6,9 @@
   "license": "MIT",
   "tasks": {
     "dev": "cd ../../ && deno task serve:backend --project=ai-activations --quiet --port=8000",
-    "prod": "concurrently 'deno -A main.ts --port=8000' 'ngrok http --domain=ai-act.ngrok.io 8000'",
-    "tunnel": "./tasks/tunnel.sh",
+    "prod": "concurrently 'deno -A --env-file=$(realpath $(pwd)/../../.env.prod) main.ts --port=8000' 'ngrok http --domain=ai-act.ngrok.io 8000'",
+    "tt": "echo $(realpath $(pwd)/../../.env.prod)",
+     "tunnel": "./tasks/tunnel.sh",
     "dev:dry": "deno task dev -- dry",
     "emulate": "./tasks/emulate.sh"
 
