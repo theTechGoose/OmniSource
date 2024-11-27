@@ -20,6 +20,7 @@ export const OptInDto = class {
 }
 
 
+
 export class SlickTextOptIn extends SlickTextRequest {
   static interface = OptInDto;
   type = "POST";
