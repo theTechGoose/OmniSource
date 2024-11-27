@@ -12,6 +12,7 @@ export const OptInDto = class {
   firstName!: string;
   lastName!: string;
   number!: string;
+  phone_number!: string;
   email!: string;
   city!: string;
   state!: string;
