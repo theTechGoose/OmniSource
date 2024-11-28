@@ -8,7 +8,8 @@
     "ai_conf:dev": "cd ./backends/ai-confirmations && deno task dev",
     "bdm": "deno -A ./scripts/create-registry-for-backend/mod.ts",
     "prod": "deno -A ./scripts/prod.ts",
-    "serve:backend": "deno -A ./scripts/denomite-serve/mod.ts"
+    "serve:backend": "deno -A ./scripts/denomite-serve/mod.ts",
+    "update:env": "deno -A ./scripts/update-env.ts"
   },
   "lint": {
     "rules": {
