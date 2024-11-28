@@ -12,6 +12,7 @@ export async function onGitPush(_ctx: any) {
   ctx.response.body = { message: "ok" };
   if (branch !== "x-deploy") return;
   await processManager.spawn(`git pull origin ${branch}`).status
+
   await cycleProcess();
 }
 
