@@ -5,6 +5,7 @@ export class ProcessManager {
   constructor(private root: string) {
     Deno.addSignalListener("SIGTERM", () => {
       this.killAll();
+
     });
   }
 
