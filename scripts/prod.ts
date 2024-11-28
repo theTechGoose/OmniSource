@@ -15,8 +15,6 @@ function validate(cfg: Array<string>) {
   const {workspace} = json;
   const invalid = cfg.filter(l => !workspace.includes(l));
 
-  console.log(cfg)
-  console.log(invalid)
   if(invalid.length) {
     throw new Error(`Invalid backends: ${invalid.join(', ')}`);
   }

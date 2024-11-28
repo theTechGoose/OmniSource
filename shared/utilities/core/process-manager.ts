@@ -9,8 +9,9 @@ export class ProcessManager {
     }
   }
 
-  spawn(cmd: string) {
-    const p = runCommand(this.root, cmd.split(' '))
+  spawn(_cmd: string) {
+    const cmd = _cmd.split(' ')
+    const p = runCommand(this.root, cmd)
     this.processes.push(p)
   }
   

@@ -4,8 +4,10 @@ export const runCommand = (
   ...filters: string[]
 ) => {
 
-  const command = new Deno.Command(cmd[0], {
-    args: cmd.slice(1),
+  const base = cmd[0]
+  const args = cmd.slice(1)
+  const command = new Deno.Command(base, {
+    args: args,
     stdout: "piped", // Directly inherit stdout
     stderr: "piped", // Directly inherit stderr
     cwd: from,
