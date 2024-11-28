@@ -23,14 +23,13 @@ export async function onGitPush(_ctx: any) {
 }
 
 async function cycleProcess() {
-  const filters = ["sftp", 'vnc', 'llm', 'local-server']
-  await killAllDenoProcessesExceptCurrent();
-  await sleep(1000);
-  const list = await listNgrokTunnels();
-  const filteredList = list.filter((t: any) => !filters.some(f => t.name.includes(f)));
-  for (const tunnel of filteredList) {
-    await killNgrokTunnel(tunnel.name);
-  }
+  //const filters = ["sftp", 'vnc', 'llm', 'local-server']
+  //await killAllDenoProcessesExceptCurrent();
+  //const list = await listNgrokTunnels();
+  //const filteredList = list.filter((t: any) => !filters.some(f => t.name.includes(f)));
+  //for (const tunnel of filteredList) {
+  //  await killNgrokTunnel(tunnel.name);
+  //}
   withTryCatch(() => runCommand(getGitRoot(), ["deno", "task", "prod"]));
 }
 
