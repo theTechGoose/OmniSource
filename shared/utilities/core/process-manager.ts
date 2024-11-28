@@ -1,4 +1,4 @@
-import {runCommand} from "@shared/utils";
+import {runCommand, withTryCatch} from "@shared/utils";
 
 export class ProcessManager {
   processes = [] as Array<Deno.ChildProcess>
@@ -6,7 +6,8 @@ export class ProcessManager {
 
   killAll() {
     for(const p of this.processes) {
-      p.kill()
+
+      withTryCatch(() =>p.kill())
     }
   }
 
