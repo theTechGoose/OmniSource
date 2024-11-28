@@ -1,5 +1,5 @@
 import { Context } from "#oak";
-import { getGitRoot, ProcessManager} from "@shared/utils";
+import { getGitRoot, ProcessManager, sleep} from "@shared/utils";
 import { GithubPushHook } from "./models.ts";
 
 const processManager = new ProcessManager(getGitRoot());
@@ -12,12 +12,12 @@ export async function onGitPush(_ctx: any) {
   ctx.response.body = { message: "ok" };
   if (branch !== "x-deploy") return;
   await processManager.spawn(`git pull origin ${branch}`).status
-
   await cycleProcess();
 }
 
 async function cycleProcess() {
   processManager.killAll()
+  await sleep(1000)
   processManager.spawn(`deno task prod`)
 } 
 
