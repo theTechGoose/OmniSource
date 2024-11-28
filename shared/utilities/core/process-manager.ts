@@ -7,6 +7,7 @@ export class ProcessManager {
   killAll() {
     for(const p of this.processes) {
 
+
       withTryCatch(() =>p.kill())
     }
   }
