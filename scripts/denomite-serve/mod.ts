@@ -143,6 +143,7 @@ const handleChange = debounce(async (path: string) => {
   const exposeCmd = `ngrok http --domain=omnisource.ngrok.dev ${port}`.split(
     " ",
   );
+
   const expose = await runCommand(".", exposeCmd);
 
   runningProcesses.add(build);

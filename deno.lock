@@ -1132,10 +1132,12 @@
   },
   "workspace": {
     "dependencies": [
+      "jsr:@libs/std@^2024.10.5",
       "jsr:@oak/oak@16.1.0",
       "jsr:@std/assert@1",
       "jsr:@std/testing@*",
       "npm:axios@*",
+      "npm:glob@*",
       "npm:nanoid@5.0.7",
       "npm:zod@*"
     ],

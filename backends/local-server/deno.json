@@ -3,8 +3,10 @@
   "name":"@backends/local-server",
   "exports": "./core/_mod.ts",
   "tasks": {
+    "prod2": "deno task -f @shared/scripts multi-run --expose='ngrok' --cmd='deno -A --env-file=$(realpath $(pwd)/../../.env.prod)' main.ts --port=8000 --quiet'",
     "dev": "deno run -A --watch ./core/_mod.ts",
-    "prod": "./tasks/prod.sh"
+    "prod": "./tasks/prod.sh",
+    "test:prod": "./tasks/prod-test-local.sh"
   },
 
   "imports": {

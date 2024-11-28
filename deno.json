@@ -24,14 +24,17 @@
     "@global_models": "./models/mod.d.ts",
     "@std/assert": "jsr:@std/assert@1",
     "@std/mock": "jsr:@std/testing/mock",
+    "#std": "jsr:@libs/std@^2024.10.5",
     "#nanoid": "npm:nanoid@5.0.7",
     "#oak": "jsr:@oak/oak@16.1.0",
     "#axios": "npm:axios",
-    "#zod": "npm:zod"
+    "#zod": "npm:zod",
+    "#glob": "npm:glob"
   },
   "workspace": [
     "shared/denomite",
     "shared/utilities",
+    "shared/scripts",
     "backends/ai-confirmations",
     "backends/ai-activations",
     "scripts",
