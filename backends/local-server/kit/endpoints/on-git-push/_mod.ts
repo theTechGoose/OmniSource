@@ -1,10 +1,6 @@
 import { Context } from "#oak";
-import {sleep, getGitRoot, ProcessManager, runCommand} from "@shared/utils";
+import { getGitRoot, ProcessManager} from "@shared/utils";
 import { GithubPushHook } from "./models.ts";
-
-export function pull(branch: string) {
-  return runCommand('.', ['pull', 'origin', branch])
-}
 
 const processManager = new ProcessManager(getGitRoot());
 export async function onGitPush(_ctx: any) {
@@ -14,9 +10,8 @@ export async function onGitPush(_ctx: any) {
   const branch = getBranch(body.ref);
   ctx.response.status = 200;
   ctx.response.body = { message: "ok" };
-  console.log("branch", branch);
   if (branch !== "x-deploy") return;
-  await pull(branch).status;
+  await processManager.spawn(`git pull origin ${branch}`).status
   await cycleProcess();
 }
 

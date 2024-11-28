@@ -13,6 +13,7 @@ export class ProcessManager {
     const cmd = _cmd.split(' ')
     const p = runCommand(this.root, cmd)
     this.processes.push(p)
+    return p
   }
   
 
