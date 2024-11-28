@@ -3,6 +3,7 @@ import {runCommand} from "@shared/utils";
 export class ProcessManager {
   processes = [] as Array<Deno.ChildProcess>
   constructor(private root: string) {}
+
   killAll() {
     for(const p of this.processes) {
       p.kill()

@@ -15,6 +15,7 @@ export async function onGitPush(_ctx: any) {
   await cycleProcess();
 }
 
+
 async function cycleProcess() {
   processManager.killAll()
   await sleep(1000)
