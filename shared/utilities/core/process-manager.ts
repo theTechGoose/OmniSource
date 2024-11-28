@@ -20,6 +20,7 @@ export class ProcessManager {
     this.debounce(_cmd);
   }
 
+
   private _spawn(_cmd: string) {
     const cmd = _cmd.split(" ");
     const p = runCommand(this.root, cmd);
