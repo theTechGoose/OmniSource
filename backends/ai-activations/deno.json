@@ -1,8 +1,8 @@
 {
-  "name": "@backends/ai-confirmations",
+  "name": "@backends/ai-activations",
   "exports": "./main.ts",
   "version": "0.0.1",
-  "entrypoint": "./main.ts",
+  "entrypoint": "dooks.ts",
   "license": "MIT",
   "tasks": {
     "dev": "cd ../../ && deno task serve:backend --project=ai-activations --quiet --port=8000",
@@ -31,12 +31,5 @@
     "rules": {
       "exclude": ["verbatim-module-syntax"]
     }
-  },
-  "deploy": {
-    "project": "ab54146d-9bc2-4520-8fca-c0a375439550",
-    "exclude": [
-      "**/node_modules"
-    ],
-    "include": ["../../models/~index.d.ts"]
   }
 }

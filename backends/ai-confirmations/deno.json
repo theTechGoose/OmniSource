@@ -1,5 +1,5 @@
 {
-  "name":"@backends/ai-activations",
+  "name":"@backends/ai-confirmations",
   "exports": "./main.ts",
   "tasks": {
     "dev": "deno run -A ./tasks/dev.ts --quiet",

@@ -17,6 +17,7 @@
     "jsr:@std/assert@^1.0.6": "1.0.8",
     "jsr:@std/assert@^1.0.8": "1.0.8",
     "jsr:@std/async@1.0.5": "1.0.5",
+    "jsr:@std/async@^1.0.5": "1.0.5",
     "jsr:@std/bytes@0.223": "0.223.0",
     "jsr:@std/bytes@0.224": "0.224.0",
     "jsr:@std/bytes@1": "1.0.3",
@@ -59,6 +60,7 @@
     "jsr:@std/io@0.224": "0.224.9",
     "jsr:@std/io@0.224.9": "0.224.9",
     "jsr:@std/io@~0.224.9": "0.224.9",
+    "jsr:@std/json@1": "1.0.0",
     "jsr:@std/json@1.0.0": "1.0.0",
     "jsr:@std/jsonc@1.0.1": "1.0.1",
     "jsr:@std/log@0.224.8": "0.224.8",
@@ -120,7 +122,7 @@
       "dependencies": [
         "jsr:@std/archive",
         "jsr:@std/assert@1.0.6",
-        "jsr:@std/async",
+        "jsr:@std/async@1.0.5",
         "jsr:@std/bytes@1.0.2",
         "jsr:@std/cache",
         "jsr:@std/cli@1.0.6",
@@ -139,7 +141,7 @@
         "jsr:@std/http@1.0.7",
         "jsr:@std/ini",
         "jsr:@std/io@0.224.9",
-        "jsr:@std/json",
+        "jsr:@std/json@1.0.0",
         "jsr:@std/jsonc",
         "jsr:@std/log",
         "jsr:@std/media-types@1.0.3",
@@ -354,7 +356,10 @@
       ]
     },
     "@std/jsonc@1.0.1": {
-      "integrity": "6b36956e2a7cbb08ca5ad7fbec72e661e6217c202f348496ea88747636710dda"
+      "integrity": "6b36956e2a7cbb08ca5ad7fbec72e661e6217c202f348496ea88747636710dda",
+      "dependencies": [
+        "jsr:@std/json@1"
+      ]
     },
     "@std/log@0.224.8": {
       "integrity": "8938225caf405cbf0a4871191fa3d55f2fabe3363f4235fdb20ebe2620ecda43",
@@ -419,6 +424,7 @@
       "integrity": "f98c2bee53860a5916727d7e7d3abe920dd6f9edace022e2d059f00d05c2cf42",
       "dependencies": [
         "jsr:@std/assert@^1.0.6",
+        "jsr:@std/async@^1.0.5",
         "jsr:@std/data-structures@^1.0.4",
         "jsr:@std/fs@^1.0.4",
         "jsr:@std/internal@^1.0.4",
