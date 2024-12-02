@@ -23,11 +23,16 @@ export class Server<T> {
   resolveEndpoints() {
     const { endpoints } = Controller.vault;
     this.resolvedEndpoints = endpoints.map((endpoint) => {
+
+      if(endpoint.type === 'local') {
       const resolvedCallbackPath = endpoint.callbackPath(this.dir);
       return {
         ...endpoint,
         resolvedCallbackPath,
       };
+      } else {
+        return endpoint; 
+      }
     });
   }
 

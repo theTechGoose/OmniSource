@@ -19,16 +19,19 @@ export class StandardPlugin extends ServerPlugin {
         throw new Error("Callback path not resolved");
       }
       console.log(endpoint.resolvedCallbackPath);
-      const hander = await import(endpoint.resolvedCallbackPath);
+      let handler = () => {};
+      if (endpoint.type === "local") {
+        handler = (await import(endpoint.resolvedCallbackPath)).default;
+      } else handler = endpoint.callbackPath as any;
       console.log("Building Endpoint");
       this.adapter.createEndpoint(
         method,
         endpoint.route,
-        hander.default,
+        handler,
         endpoint.auth,
       );
     });
     await Promise.all($);
-    return
+    return;
   }
 }

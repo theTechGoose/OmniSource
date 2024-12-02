@@ -1,6 +1,7 @@
 export interface IParsedEndpoint {
   controller: string;
-  version: string;
+  type: string;
+  version?: string;
   verb: string;
   route: string;
   auth: Function;
