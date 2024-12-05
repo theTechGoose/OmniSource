@@ -36,9 +36,7 @@
   },
   "workspace": [
     "shared/denomite",
-    "shared/cli",
     "shared/utilities",
-    "shared/scripts",
     "backends/ai-confirmations",
     "backends/ai-activations",
     "scripts",
