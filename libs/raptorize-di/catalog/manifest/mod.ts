@@ -1,7 +1,7 @@
 import { nanoid } from "#nanoid";
-import { Constructor, IDependencyManifest, IPreparedDependency } from "../../mod.ts";
 
-export class PreparedDependency implements IPreparedDependency {
+
+export class PreparedDependency {
   readonly id: string;
   private _instance: unknown | null = null;
 
@@ -18,7 +18,7 @@ export class PreparedDependency implements IPreparedDependency {
     this.id = id;
   }
 
-  buildInstance(registry: IDependencyManifest) {
+  buildInstance(registry: DependencyManifest) {
     if (this._instance) {
       return this._instance;
     }
@@ -39,7 +39,7 @@ export class PreparedDependency implements IPreparedDependency {
   }
 }
 
-export class DependencyManifest implements IDependencyManifest {
+export class DependencyManifest implements DependencyManifest {
   private manifest: Array<PreparedDependency> = [];
 
   forEach(fn: (dep: PreparedDependency) => void) {

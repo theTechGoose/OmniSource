@@ -1,30 +1,23 @@
-// Core types for dependency injection
-export interface Constructor<T = any> {
-  new (...args: any[]): T;
-  id?: string;
-}
+import {createFunclet} from "@shared/utils";
+import "#reflect";
+import { DependencyManifest, PreparedDependency } from "./catalog/manifest/mod.ts";
 
-export interface ExtendedConstructor extends Constructor {
-  id: string;
-}
+const manifest = new DependencyManifest();
 
-export interface IDependencyManifest {
-  forEach(fn: (dep: IPreparedDependency) => void): void;
-  init(): void;
-  addDependency(target: IPreparedDependency): void;
-  getDependencyById(id: string): IPreparedDependency | undefined;
-  getDependencyByConstructor(constructor: Constructor): IPreparedDependency | undefined;
-}
+export const λ = createFunclet(manifest, <T extends Constructor>(_target: T): InstanceType<T> => {
+  const target = _target as unknown as ExtendedConstructor
+  const dep = λ.vault.getDependencyById(target.id)
+  if(!dep) throw new Error(`Dependency not found: ${target.id}`)
+  return dep.instance as InstanceType<T>
+})
 
-export interface IPreparedDependency {
-  readonly id: string;
-  instance: unknown;
-  buildInstance(registry: IDependencyManifest): unknown;
-  buildManual(...params: any[]): this;
-}
+export function Dependency<T extends Object>(target: T) {
+  const params = Reflect.getMetadata("design:paramtypes", target) ?? [];
+  const dep = new PreparedDependency(target as any, params);
+  λ.vault.addDependency(dep);
 
-// Re-export all module components
-export * from "./catalog/decorator/mod.ts";
-export * from "./catalog/resolver/mod.ts";
-export * from "./setup/manifest/mod.ts";
-export * from "./setup/loader/mod.ts";
+  return class {
+    static id: string = dep.id;
+    id: string = dep.id;
+  } as unknown as T & { id: string };
+}
