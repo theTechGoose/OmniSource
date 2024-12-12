@@ -35,11 +35,9 @@
     "#esbuild": "npm:esbuild@0.20.2"
   },
   "workspace": [
-    "shared/denomite",
-    "shared/utilities",
     "backends/ai-confirmations",
     "backends/ai-activations",
-    "scripts",
-    "backends/local-server"
+    "shared/denomite",
+    "shared/utilities"
   ]
 }
