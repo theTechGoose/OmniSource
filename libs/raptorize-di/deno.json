@@ -1,0 +1,10 @@
+{
+  "name": "@libs/raptorize-di",
+  "imports": {
+    "#reflect": "npm:reflect-metadata@0.2.1"
+  },
+  "exports":"./mod.ts",
+  "tasks": {
+    "test": "deno test --allow-all"
+  }
+}

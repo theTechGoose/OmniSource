@@ -1,0 +1,7 @@
+{
+  "name": "@libs/denomite",
+  "imports": {},
+  "tasks": {
+    "test": "deno test --allow-all"
+  }
+}

@@ -29,7 +29,9 @@
     "@globals/magic-values": "./magic-values.ts"
   },
   "workspace": [
-    "libs/utilities"
+    "libs/utilities",
+    "libs/raptorize-di",
+    "libs/denomite"
   ],
   "test": {
     "exclude": ["transfer-*/**/*"]
