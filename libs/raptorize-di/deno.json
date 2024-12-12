@@ -1,0 +1,11 @@
+{
+  "extends": "../../deno.json",
+  "imports": {
+    "#nanoid": "npm:nanoid@5.0.7",
+    "#reflect": "npm:reflect-metadata@0.2.1",
+    "#std/assert": "jsr:@std/assert@1"
+  },
+  "tasks": {
+    "test": "deno test --allow-all"
+  }
+}
