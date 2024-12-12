@@ -3,8 +3,6 @@
   "specifiers": {
     "jsr:@deno/cache-dir@0.13.2": "0.13.2",
     "jsr:@deno/emit@*": "0.46.0",
-    "jsr:@dx/reflect@*": "0.2.14",
-    "jsr:@dx/reflect@0.2.14": "0.2.14",
     "jsr:@libs/std@^2024.10.5": "2024.10.5",
     "jsr:@luca/esbuild-deno-loader@0.11": "0.11.0",
     "jsr:@nothing628/chalk@*": "1.0.1",
@@ -103,14 +101,12 @@
     "npm:@types/node@*": "22.5.4",
     "npm:axios@*": "1.7.7",
     "npm:chalk@*": "5.3.0",
-    "npm:date-fns@*": "4.1.0",
     "npm:esbuild-node-tsc@*": "2.0.5_esbuild@0.20.2_typescript@5.6.3",
     "npm:esbuild-plugin-tsc@*": "0.4.0_typescript@5.6.3",
     "npm:esbuild-tsc@*": "1.2.0",
     "npm:esbuild@0.20.2": "0.20.2",
     "npm:find-git-root@*": "1.0.4",
     "npm:git-rev-sync@*": "3.0.2",
-    "npm:glob-to-regexp@~0.4.1": "0.4.1",
     "npm:glob@*": "11.0.0",
     "npm:lodash@*": "4.17.21",
     "npm:lodash@4.17.21": "4.17.21",
@@ -119,7 +115,7 @@
     "npm:papaparse@*": "5.4.1",
     "npm:path-to-regexp@6.2.1": "6.2.1",
     "npm:reflect-metadata@*": "0.2.2",
-    "npm:tsyringe@^4.8.0": "4.8.0",
+    "npm:reflect-metadata@0.2.1": "0.2.1",
     "npm:zod@*": "3.23.8"
   },
   "jsr": {
@@ -138,9 +134,6 @@
         "jsr:@deno/cache-dir",
         "jsr:@std/path@0.223"
       ]
-    },
-    "@dx/reflect@0.2.14": {
-      "integrity": "53e1cb54e25170f43d90966679fcd7d6e0d27e23f4f1c869330d339576f446be"
     },
     "@libs/std@2024.10.5": {
       "integrity": "6044bf9daefc295b6d9d1204cee7353a29117c1ade84f193131cc63406eadb81",
@@ -670,9 +663,6 @@
         "which"
       ]
     },
-    "date-fns@4.1.0": {
-      "integrity": "sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg=="
-    },
     "delayed-stream@1.0.0": {
       "integrity": "sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ=="
     },
@@ -774,9 +764,6 @@
         "graceful-fs",
         "shelljs"
       ]
-    },
-    "glob-to-regexp@0.4.1": {
-      "integrity": "sha512-lkX1HJXwyMcprw/5YUZc2s7DrpAiHB21/V+E1rHUrVNokkvB6bqMzT0VfV6/86ZNabt1k14YOIaT7nDvOX3Iiw=="
     },
     "glob@11.0.0": {
       "integrity": "sha512-9UiX/Bl6J2yaBbxKoEBRm4Cipxgok8kQYcOPEhScPwebu2I0HoQOuYdIO6S3hLuWoZgpDpwQZMzTFxgpkyT76g==",
@@ -913,6 +900,9 @@
         "resolve"
       ]
     },
+    "reflect-metadata@0.2.1": {
+      "integrity": "sha512-i5lLI6iw9AU3Uu4szRNPPEkomnkjRTaVt9hy/bn5g/oSzekBSMeLZblcjP74AW0vBabqERLLIrz+gR8QYR54Tw=="
+    },
     "reflect-metadata@0.2.2": {
       "integrity": "sha512-urBwgfrvVP/eAyXx4hluJivBKzuEbSQs9rKWCrCkbSxNv8mxPcUZKeuoF3Uy4mJl3Lwprp6yy5/39VWigZ4K6Q=="
     },
@@ -980,15 +970,6 @@
     },
     "supports-preserve-symlinks-flag@1.0.0": {
       "integrity": "sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w=="
-    },
-    "tslib@1.14.1": {
-      "integrity": "sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg=="
-    },
-    "tsyringe@4.8.0": {
-      "integrity": "sha512-YB1FG+axdxADa3ncEtRnQCFq/M0lALGLxSZeVNbTU8NqhOVc51nnv2CISTcvc1kyv6EGPtXVr0v6lWeDxiijOA==",
-      "dependencies": [
-        "tslib"
-      ]
     },
     "typescript@5.6.3": {
       "integrity": "sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw=="
@@ -1343,37 +1324,15 @@
       "npm:esbuild@0.20.2",
       "npm:glob@*",
       "npm:nanoid@5.0.7",
+      "npm:reflect-metadata@0.2.1",
       "npm:zod@*"
     ],
     "members": {
-      "backends/ai-activations": {
+      "libs/raptorize-di": {
         "dependencies": [
-          "jsr:@libs/std@^2024.10.5",
           "jsr:@std/assert@1",
-          "npm:glob-to-regexp@~0.4.1",
-          "npm:tsyringe@^4.8.0"
-        ]
-      },
-      "backends/ai-confirmations": {
-        "dependencies": [
-          "jsr:@libs/std@^2024.10.5",
-          "jsr:@std/assert@1",
-          "npm:tsyringe@^4.8.0"
-        ]
-      },
-      "backends/local-server": {
-        "dependencies": [
-          "npm:date-fns@*"
-        ]
-      },
-      "scripts": {
-        "dependencies": [
-          "jsr:@libs/std@^2024.10.5"
-        ]
-      },
-      "shared/denomite": {
-        "dependencies": [
-          "jsr:@dx/reflect@0.2.14"
+          "npm:nanoid@5.0.7",
+          "npm:reflect-metadata@0.2.1"
         ]
       }
     }

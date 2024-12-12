@@ -1,0 +1,14 @@
+{
+  "imports": {
+    "#nanoid": "npm:nanoid@5.0.7",
+    "#std/assert": "jsr:@std/assert@1",
+    "#reflect": "npm:reflect-metadata@0.2.1"
+  },
+  "tasks": {
+    "test": "deno test --allow-all"
+  },
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}

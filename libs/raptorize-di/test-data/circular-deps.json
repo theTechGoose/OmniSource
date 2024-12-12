@@ -1,0 +1,8 @@
+{
+  "class1": {
+    "dependencies": ["class2"]
+  },
+  "class2": {
+    "dependencies": ["class1"]
+  }
+}
