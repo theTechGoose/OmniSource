@@ -22,14 +22,24 @@
     "#glob": "npm:glob",
     "#nanoid": "npm:nanoid@5.0.7",
     "#oak": "jsr:@oak/oak@16.1.0",
+    "#reflect": "npm:reflect-metadata@0.2.1",
     "#std": "jsr:@libs/std@^2024.10.5",
     "#std/assert": "jsr:@std/assert@1",
     "#zod": "npm:zod",
+    "@std/assert": "jsr:@std/assert@1",
     "$std/mock": "jsr:@std/testing/mock",
-    "@globals/magic-values": "./magic-values.ts"
+    "@globals/magic-values": "./magic-values.ts",
+    "@raptorize/di": "./libs/raptorize-di/mod.ts",
+    "@libs/utilities": "./libs/utilities/mod.ts",
+    "@core": "./libs/utilities/core/mod.ts",
+    "@higher-order-functions": "./libs/utilities/higher-order-functions/mod.ts",
+    "@arrays": "./libs/utilities/arrays/mod.ts",
+    "@validation": "./libs/utilities/validation/mod.ts",
+    "@string-manipulation": "./libs/utilities/string-manipulation/mod.ts"
   },
   "workspace": [
-    "libs/utilities"
+    "libs/utilities",
+    "libs/raptorize-di"
   ],
   "test": {
     "exclude": ["transfer-*/**/*"]

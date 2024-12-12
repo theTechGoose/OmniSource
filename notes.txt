@@ -1,0 +1,71 @@
+# OmniSource Project Analysis
+
+## Project Overview
+- Deno-based monorepo with sophisticated dependency injection and server framework
+- Uses JSR and NPM packages (configured in deno.json)
+- Utilities library is well-documented, but main project lacks comprehensive documentation
+
+## Core Systems
+
+### 1. Dependency Injection System (transfer-1/core/resolution)
+- Location: transfer-1/core/resolution/
+- Purpose: Manages class instance creation and dependency management
+- Key Components:
+  - Resolution Core: Base dependency resolution logic
+  - Resolution Kit: Helper utilities and loaders
+  - Models: Type definitions and interfaces
+
+### 2. Server Framework (transfer-1/core/server)
+- Location: transfer-1/core/server/
+- Components:
+  - Server Core: Base server functionality
+  - Controller Decorators: Endpoint registration
+  - Server Plugins: Extensible plugin system
+  - Models: Server-related interfaces
+
+### 3. Utilities Library (libs/utilities)
+- Well-documented with clear examples
+- Modules:
+  - Higher-Order Functions
+  - Core Utilities
+  - String Manipulation
+  - Array Utilities
+  - Validation Tools
+  - Deno-specific Utilities
+  - Ngrok Integration
+
+## Configuration
+
+### Magic Values System
+- Centralized string management (magic-values.ts)
+- Uses a vault pattern for shared strings
+- Type-safe access through MagicStrings class
+- Values organized by app/module
+
+### Deno Configuration
+- Decorator metadata enabled
+- Custom lint rules
+- Workspace configuration for utilities
+- Test exclusions for transfer directories
+- Mixed package imports (JSR and NPM)
+
+## Development Guidelines
+1. Testing:
+   - Test files excluded from transfer-* directories
+   - Utilities have comprehensive test coverage
+
+2. Code Organization:
+   - Modular structure with clear separation of concerns
+   - Core systems in transfer-1/core/
+   - Shared utilities in libs/utilities/
+
+3. Package Management:
+   - Uses both JSR and NPM packages
+   - Configured through deno.json imports
+
+## Questions for Further Investigation
+1. Purpose and status of transfer-1 directory
+2. Testing conventions and requirements
+3. Deployment process details
+4. Performance considerations
+5. Integration patterns between core systems

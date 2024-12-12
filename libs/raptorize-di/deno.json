@@ -1,0 +1,9 @@
+{
+  "extends": "../../deno.json",
+  "imports": {
+    "#reflect": "npm:reflect-metadata@0.2.1"
+  },
+  "tasks": {
+    "test": "deno test --allow-all"
+  }
+}
