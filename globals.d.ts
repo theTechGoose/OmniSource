@@ -1,7 +1,15 @@
-/// <reference lib="deno.ns" />
-
 declare global {
-  // Global types are already provided by deno.ns
+  interface Constructor<T = any> {
+    new (...args: any[]): T;
+    id?: string;
+    name: string;
+    constructor: { name: string };
+  }
+
+  /** @deprecated Use Constructor instead */
+  interface ExtendedConstructor<T = any> extends Constructor<T> {
+    id: string;
+  }
 }
 
-export {} // This is needed to make this file a module
+export {};
