@@ -1,9 +1,0 @@
-{
-  "name": "@shared/scripts",
-  "version": "0.0.1",
-  "exports": "./mod.ts",
-  "task": {
-    "multi-run": "deno run -A ./multi-run/core/_mod.ts"
-  },
-  "imports": {}
-}

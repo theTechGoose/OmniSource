@@ -1,16 +1,10 @@
 {
   "compilerOptions": {
-
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "types": ["./globals.d.ts"]
   },
-  "tasks": {
-    "ai_conf:dev": "cd ./backends/ai-confirmations && deno task dev",
-    "bdm": "deno -A ./scripts/create-registry-for-backend/mod.ts",
-    "prod": "deno -A ./scripts/prod.ts",
-    "serve:backend": "deno -A ./scripts/denomite-serve/mod.ts",
-    "update:env": "deno -A ./scripts/update-env.ts"
-  },
+  "tasks": {},
   "lint": {
     "rules": {
       "exclude": [
@@ -22,22 +16,22 @@
     }
   },
   "imports": {
-    "@global_models": "./models/mod.d.ts",
-    "@std/assert": "jsr:@std/assert@1",
-    "@std/mock": "jsr:@std/testing/mock",
-    "#std": "jsr:@libs/std@^2024.10.5",
+    "#axios": "npm:axios",
+    "#emit": "jsr:@deno/emit",
+    "#esbuild": "npm:esbuild@0.20.2",
+    "#glob": "npm:glob",
     "#nanoid": "npm:nanoid@5.0.7",
     "#oak": "jsr:@oak/oak@16.1.0",
-    "#axios": "npm:axios",
+    "#std": "jsr:@libs/std@^2024.10.5",
+    "#std/assert": "jsr:@std/assert@1",
     "#zod": "npm:zod",
-    "#glob": "npm:glob",
-    "#emit": "jsr:@deno/emit",
-    "#esbuild": "npm:esbuild@0.20.2"
+    "$std/mock": "jsr:@std/testing/mock",
+    "@globals/magic-values": "magic-values.ts"
   },
   "workspace": [
-    "backends/ai-confirmations",
-    "backends/ai-activations",
-    "shared/denomite",
-    "shared/utilities"
-  ]
+    "libs/utilities"
+  ],
+  "test": {
+    "exclude": ["depricated/**/*"]
+  }
 }
