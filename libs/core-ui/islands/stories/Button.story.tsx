@@ -59,8 +59,8 @@ export const description = (
   <div class="space-y-4">
     <h1 class="text-2xl font-bold">Button Component</h1>
     <p>
-      A versatile button component that supports different variants, sizes, and states.
-      Built with Preact and styled using Tailwind CSS.
+      A versatile button component that supports different variants, sizes, and
+      states. Built with Preact and styled using Tailwind CSS.
     </p>
 
     <h2 class="text-xl font-bold">Usage</h2>

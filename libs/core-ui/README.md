@@ -1,16 +1,44 @@
-# Fresh project
+# Core UI Library
 
-Your new Fresh project is ready to go. You can follow the Fresh "Getting
-Started" guide here: https://fresh.deno.dev/docs/getting-started
+A minimalist UI component library focused on component isolation and story-based
+development.
 
-### Usage
+## Components
 
-Make sure to install Deno: https://deno.land/manual/getting_started/installation
+- Button: A versatile button component with various styles and sizes
 
-Then start the project:
+## Usage
+
+Components can be imported directly and used in your Fresh projects:
+
+```tsx
+import { Button } from "../components/Button/mod.tsx";
+
+export default function MyComponent() {
+  return <Button variant="primary">Click me</Button>;
+}
+```
+
+## Development
+
+View component stories by running the development server:
+
+```bash
+deno task check   # Type check and lint
+deno task test    # Run tests
+```
+
+## Architecture
+
+The library follows a simple structure focused on component isolation:
 
 ```
-deno task start
+core-ui/
+ components/     # UI components
+   └── Button/
+       ├── mod.tsx      # Component implementation
+       └── test.tsx     # Component tests
+ islands/       # Interactive components
+   └── stories/   # Component stories
+ routes/        # Story rendering
 ```
-
-This will watch the project directory and restart as necessary.
