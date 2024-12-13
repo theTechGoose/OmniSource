@@ -1,4 +1,4 @@
-import { runCommand } from "../core/_mod.ts"; // Adjust path to your utility
+import { runCommand } from "../core/mod.ts"; // Adjust path to your utility
 
 /**
  * Kill all Deno processes except the current one.
@@ -17,7 +17,7 @@ export async function killAllDenoProcessesExceptCurrent(): Promise<void> {
       return;
     }
 
-    const stdout = await new TextDecoder().decode(await process.output());
+    const stdout = await new TextDecoder().decode(await process.output() as unknown as Uint8Array);
     const processes = stdout
       .split("\n")
       .filter((line) => line.trim() !== "") // Remove empty lines
@@ -43,7 +43,8 @@ export async function killAllDenoProcessesExceptCurrent(): Promise<void> {
     }
 
     console.log("All other Deno processes have been terminated.");
-  } catch (error) {
+  } catch (_error) {
+    const error: any = _error;
     console.error("Error occurred:", error.message);
   }
 }
