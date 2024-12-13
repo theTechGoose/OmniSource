@@ -1,0 +1,20 @@
+{
+  "endpoints": [
+    {
+      "route": "/test",
+      "method": "GET",
+      "requiresAuth": false,
+      "expectedResponse": {
+        "message": "success"
+      }
+    },
+    {
+      "route": "/protected",
+      "method": "POST",
+      "requiresAuth": true,
+      "expectedResponse": {
+        "message": "Unauthorized"
+      }
+    }
+  ]
+}

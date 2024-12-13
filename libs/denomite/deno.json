@@ -1,7 +1,9 @@
 {
   "name": "@libs/denomite",
   "imports": {
-    "#oak": "https://deno.land/x/oak@v12.6.1/mod.ts"
+    "#oak": "https://deno.land/x/oak@v12.6.1/mod.ts",
+    "#std/testing": "https://deno.land/std@0.200.0/testing/mod.ts",
+    "#std/asserts": "https://deno.land/std@0.200.0/testing/asserts.ts"
   },
   "exports": {
     ".": "./mod.ts"
