@@ -69,3 +69,97 @@
 3. Deployment process details
 4. Performance considerations
 5. Integration patterns between core systems
+
+## UI Component System (Fresh Stories Investigation)
+
+### Component Organization
+1. Directory Structure
+   ```
+   /
+   ├── components/      # Reusable UI components
+   ├── islands/        # Interactive components
+   │   └── stories/    # Component stories
+   ├── routes/         # Page routes
+   └── fresh.config.ts # Framework configuration
+   ```
+
+2. Component Patterns
+   - Components defined in `/components` directory
+   - Story files in `/islands/stories` with `.story.tsx` extension
+   - Uses Preact for component implementation
+   - Tailwind CSS for styling
+   - Supports props spreading and conditional rendering
+
+### State Management
+1. Preact Signals
+   - Uses @preact/signals for reactive state
+   - Example:
+   ```typescript
+   interface CounterProps {
+     count: Signal<number>;
+   }
+   ```
+   - State updates through signal value modifications
+
+2. Component Props
+   - TypeScript interfaces for prop definitions
+   - Supports HTML attributes spreading
+   - Conditional rendering based on IS_BROWSER
+
+### Integration Methods
+1. Fresh Framework Plugin
+   ```typescript
+   import { defineConfig } from "$fresh/server.ts";
+   import storiesPlugin from "https://deno.land/x/fresh_stories@0.0.5/stories-plugin.ts";
+
+   export default defineConfig({
+     plugins: [storiesPlugin(), tailwind()],
+   });
+   ```
+
+2. Story Files
+   - Named `*.story.tsx`
+   - Import components directly
+   - Support JSX in descriptions
+   - Include code examples with Copyable component
+
+### Component Documentation
+1. Story Format
+   ```typescript
+   export default function Stories() {
+     return <Component />;
+   }
+
+   export const description = (
+     <>
+       <p>Component description in JSX</p>
+       <Copyable code={`<component-example />`} />
+     </>
+   );
+   ```
+
+2. Features
+   - Interactive examples
+   - Code snippets
+   - JSX-based documentation
+   - Props documentation through TypeScript
+
+### Testing Strategy
+- Unit tests for components
+- Story files serve as visual testing
+- Interactive testing through story UI
+
+### Dependencies
+- Fresh framework
+- Preact
+- Tailwind CSS
+- @preact/signals for state
+- Fresh Stories plugin
+
+### Key Insights for core-ui Implementation
+1. Follow similar directory structure
+2. Use Preact and Fresh runtime
+3. Implement story-based documentation
+4. Support component isolation
+5. Use Tailwind for styling
+6. Implement comprehensive testing

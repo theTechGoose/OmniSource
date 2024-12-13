@@ -10,6 +10,17 @@ declare global {
   interface ExtendedConstructor<T = any> extends Constructor<T> {
     id: string;
   }
+
+  namespace JSX {
+    interface Element {
+      type: any;
+      props: any;
+      key: string | null;
+    }
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
 }
 
 export {};

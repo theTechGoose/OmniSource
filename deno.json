@@ -2,7 +2,10 @@
   "compilerOptions": {
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "types": ["./globals.d.ts"]
+    "types": ["./globals.d.ts"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
+    "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
   },
   "tasks": {},
   "lint": {
@@ -35,12 +38,24 @@
     "@higher-order-functions": "./libs/utilities/higher-order-functions/mod.ts",
     "@arrays": "./libs/utilities/arrays/mod.ts",
     "@validation": "./libs/utilities/validation/mod.ts",
-    "@string-manipulation": "./libs/utilities/string-manipulation/mod.ts"
+    "@string-manipulation": "./libs/utilities/string-manipulation/mod.ts",
+    "@core-ui/": "./libs/core-ui/",
+    "$fresh/": "https://deno.land/x/fresh@1.7.3/",
+    "preact": "https://esm.sh/preact@10.22.0",
+    "preact/": "https://esm.sh/preact@10.22.0/",
+    "preact-render-to-string": "https://esm.sh/*preact-render-to-string@6.3.1",
+    "@preact/signals": "https://esm.sh/*@preact/signals@1.2.2",
+    "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.1",
+    "fresh-stories/": "https://deno.land/x/fresh_stories@0.0.5/",
+    "tailwindcss": "npm:tailwindcss@3.4.1",
+    "tailwindcss/": "npm:/tailwindcss@3.4.1/",
+    "tailwindcss/plugin": "npm:/tailwindcss@3.4.1/plugin.js"
   },
   "workspace": [
     "libs/utilities",
     "libs/raptorize-di",
-    "libs/denomite"
+    "libs/denomite",
+    "libs/core-ui"
   ],
   "test": {
     "exclude": ["transfer-*/**/*"]
