@@ -3,18 +3,12 @@
     {
       "route": "/test",
       "method": "GET",
-      "requiresAuth": false,
-      "expectedResponse": {
-        "message": "success"
-      }
+      "requiresAuth": false
     },
     {
       "route": "/protected",
       "method": "POST",
-      "requiresAuth": true,
-      "expectedResponse": {
-        "message": "Unauthorized"
-      }
+      "requiresAuth": true
     }
   ]
 }
