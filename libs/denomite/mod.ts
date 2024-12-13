@@ -1,29 +1,72 @@
-// import {Application, Router, RouterContext} from '#oak';
+import {
+  Application,
+  Context,
+  Router,
+} from "https://deno.land/x/oak@v12.6.1/mod.ts";
+import type { ResponseBody } from "https://deno.land/x/oak@v12.6.1/response.ts";
+import { withTryCatch } from "@libs/utils";
 
+export interface Endpoint {
+  route: string;
+  method: "get" | "post" | "put" | "delete" | "patch";
+  auth: (ctx: Context) => boolean | Promise<boolean>;
+  handler: (ctx: Context) => Promise<ResponseBody> | ResponseBody;
+}
 
-// TODO: Fix these linting errors
-// interface Endpoint {
-  // route: string;
-  // method: string;
-  // auth: (ctx: RouterContext<any>) => boolean;
-  // handler: (ctx: RouterContext<any>) => any;
-// }
+export class Server {
+  private app: Application;
+  private router: Router;
+  private controller: AbortController;
 
-// class Server {
-  // private app = new Application();
-  // private router = new Router();
-  // private setupCallbacks: Array<(registry: Array<Endpoint>) => void> = [];
-  //constructor(registry: Array<Endpoint>) {}
-  // private addEndpoint(endpoint: Endpoint): any -- registers an endpoint in the router, when the handler returns something it sets it as the response.body
-  // if the handler returns nothing it sets the body as an empty object, before calling the handler it should check if the auth function returns true
-  // if it does not set the response status to 401 and return an object with a message property set to "Unauthorized"
-  // if the handler throws an error set the response status to 500 and return an object with a message property set to the error message
+  constructor(private registry: Endpoint[]) {
+    this.app = new Application();
+    this.router = new Router();
+    this.controller = new AbortController();
+    this.registry.forEach((endpoint) => this.addEndpoint(endpoint));
+    this.app.use(this.router.routes());
+    this.app.use(this.router.allowedMethods());
+  }
 
+  private addEndpoint(endpoint: Endpoint): void {
+    this.router[endpoint.method](endpoint.route, async (ctx: Context) => {
+      const { auth, handler } = endpoint;
+      const [success, error] = await withTryCatch(async () => await auth(ctx));
 
-  //figure this out
-  // addMiddleware(fn: (ctx: RouterContext<any>) => any): void {
-  //   this.app.use(fn);
-  // }
+      if (!success || error) {
+        ctx.response.status = 401;
+        ctx.response.body = { message: "Unauthorized" };
+        return;
+      }
 
-  // start(port: number): Promise<void> // runs all setup callbacks, calls register endpoint on each endpoint, then calls app.listen
-// }
+      const [res, resErr] = await withTryCatch(async () => await handler(ctx));
+
+      if (resErr) {
+        ctx.response.status = 500;
+        ctx.response.body = { message: "Internal Server Error" };
+        return;
+      }
+
+      if (res) {
+        ctx.response.body = res;
+        return;
+      }
+    });
+  }
+
+  async start(port: number): Promise<void> {
+    await withTryCatch(async () => {
+      await this.app.listen({ port, signal: this.controller.signal })
+    });
+    try {
+      await this.app.listen({ port, signal: this.controller.signal });
+    } catch (error: unknown) {
+      if (error instanceof Error && error.name !== "AbortError") {
+        throw error;
+      }
+    }
+  }
+
+  stop(): void {
+    this.controller.abort();
+  }
+}

@@ -1,4 +1,4 @@
-import { thrw } from "@core";
+import { thrw } from "../core/thrw.ts";
 
 /**
  * Check if the given object has all the properties in the given list.

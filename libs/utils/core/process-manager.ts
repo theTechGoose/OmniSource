@@ -1,5 +1,5 @@
 import {debounce} from "#std";
-import { runCommand, withTryCatch } from "@shared/utils";
+import { runCommand, withTryCatch } from "@libs/utils";
 
 export class ProcessManager {
   processes = [] as Array<Deno.ChildProcess>;
