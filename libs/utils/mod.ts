@@ -5,4 +5,4 @@ export * from './validation/mod.ts'
 export * from './string-manipulation/mod.ts'
 export * from './deno/mod.ts'
 export * from './ngrok/mod.ts'
-
+export * from './testing/mod.ts'

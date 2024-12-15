@@ -1,0 +1,4 @@
+{
+  "imprt": "import PQUqIloLLwWphOHoxrYPabydK from './dupe-test/e1/v001.ts';",
+  "content": "{\nmethod: 'post',\nroute: 'dupe-test/run/V001',\nhandler: PQUqIloLLwWphOHoxrYPabydK,\nauth: new DupeTestController().canActivate,\n}"
+}

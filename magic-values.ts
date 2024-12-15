@@ -18,9 +18,12 @@
 //
 
 const vault = {
-  dooks: {
-    dookie: 'dookie'
-  }
+  denomite: {
+    variableNamingAlphabet: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    controllerPattern: '**/config.ts',
+    defaultVersionName: 'DFLT',
+
+  },
 }
 
 
@@ -71,5 +74,5 @@ class MagicStrings<T extends object> {
 }
 
 const out = new MagicStrings<typeof vault>(vault);
-export default out;
+export default out.resolve.bind(out) as typeof out.resolve;
 

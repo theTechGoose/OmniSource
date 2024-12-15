@@ -1,0 +1,58 @@
+[
+  {
+    "method": "Post",
+    "fullRoute": "dupe-test/run/V001",
+    "fullPath": "/Users/goose/Documents/New_Programing/OmniSource/libs/denomite/test-data/test-server/dupe-test/e1/v001.ts",
+    "controllerName": "DupeTestController",
+    "controllerPath": "/Users/goose/Documents/New_Programing/OmniSource/libs/denomite/test-data/test-server/dupe-test/config.ts"
+  },
+  {
+    "method": "Post",
+    "fullRoute": "dupe-test/run/V002",
+    "fullPath": "/Users/goose/Documents/New_Programing/OmniSource/libs/denomite/test-data/test-server/dupe-test/e1/v002.ts",
+    "controllerName": "DupeTestController",
+    "controllerPath": "/Users/goose/Documents/New_Programing/OmniSource/libs/denomite/test-data/test-server/dupe-test/config.ts"
+  },
+  {
+    "method": "Get",
+    "fullRoute": "dupe-test/list/V001",
+    "fullPath": "/Users/goose/Documents/New_Programing/OmniSource/libs/denomite/test-data/test-server/dupe-test/e2/v001.ts",
+    "controllerName": "DupeTestController",
+    "controllerPath": "/Users/goose/Documents/New_Programing/OmniSource/libs/denomite/test-data/test-server/dupe-test/config.ts"
+  },
+  {
+    "method": "Post",
+    "fullRoute": "dupe-test/exec/V001",
+    "fullPath": "/Users/goose/Documents/New_Programing/OmniSource/libs/denomite/test-data/test-server/dupe-test/e3/v001.ts",
+    "controllerName": "DupeTestController",
+    "controllerPath": "/Users/goose/Documents/New_Programing/OmniSource/libs/denomite/test-data/test-server/dupe-test/config.ts"
+  },
+  {
+    "method": "Post",
+    "fullRoute": "test/run2/V001",
+    "fullPath": "/Users/goose/Documents/New_Programing/OmniSource/libs/denomite/test-data/test-server/test/e1/v001.ts",
+    "controllerName": "TestController",
+    "controllerPath": "/Users/goose/Documents/New_Programing/OmniSource/libs/denomite/test-data/test-server/test/config.ts"
+  },
+  {
+    "method": "Post",
+    "fullRoute": "test/run2/V002",
+    "fullPath": "/Users/goose/Documents/New_Programing/OmniSource/libs/denomite/test-data/test-server/test/e1/v002.ts",
+    "controllerName": "TestController",
+    "controllerPath": "/Users/goose/Documents/New_Programing/OmniSource/libs/denomite/test-data/test-server/test/config.ts"
+  },
+  {
+    "method": "Get",
+    "fullRoute": "test/list2/V001",
+    "fullPath": "/Users/goose/Documents/New_Programing/OmniSource/libs/denomite/test-data/test-server/test/e2/v001.ts",
+    "controllerName": "TestController",
+    "controllerPath": "/Users/goose/Documents/New_Programing/OmniSource/libs/denomite/test-data/test-server/test/config.ts"
+  },
+  {
+    "method": "Post",
+    "fullRoute": "test/exec2/V001",
+    "fullPath": "/Users/goose/Documents/New_Programing/OmniSource/libs/denomite/test-data/test-server/test/e3/v001.ts",
+    "controllerName": "TestController",
+    "controllerPath": "/Users/goose/Documents/New_Programing/OmniSource/libs/denomite/test-data/test-server/test/config.ts"
+  }
+]
