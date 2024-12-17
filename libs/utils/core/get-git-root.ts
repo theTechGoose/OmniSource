@@ -1,13 +1,14 @@
-import { execSync } from "node:child_process";
-
-export function getGitRoot() {
-  const gitRoot = execSync("git rev-parse --show-toplevel", {
-    encoding: "utf8",
-  }).trim();
-  if (!gitRoot) {
-    throw new Error(
-      "Failed to locate Git root. Ensure you're in a Git repository.",
-    );
+export async function getGitRoot(path?: string) {
+  try {
+    const cmd = new Deno.Command("git", {
+      args: ["rev-parse", "--show-toplevel"],
+      cwd: path,
+    });
+    const { stdout } = await cmd.output();
+    const decoder = new TextDecoder();
+    const gitRoot = decoder.decode(stdout).trim();
+    return gitRoot || null;
+  } catch {
+    return null;
   }
-  return gitRoot;
 }

@@ -1,61 +1,87 @@
+import { TextLineStream } from "#std/streams/text_line_stream";
+
 export const runCommand = (
   from: string,
   cmd: string[],
   ...filters: string[]
-) => {
+): Deno.ChildProcess => {
+  const base = cmd[0];
+  const args = cmd.slice(1);
 
-  const base = cmd[0]
-  const args = cmd.slice(1)
   const command = new Deno.Command(base, {
-    args: args,
-    stdout: "piped", // Directly inherit stdout
-    stderr: "piped", // Directly inherit stderr
+    args,
+    stdout: "piped",
+    stderr: "piped",
     cwd: from,
     env: {
-      ...Deno.env.toObject(), // Preserve existing environment variables
       DENONOWARN: "experimentalDecorators",
-      FORCE_COLOR: "1", // Ensure this is correctly set
+      FORCE_COLOR: "1",
       TERM: "xterm-256color",
     },
   });
+
   const process = command.spawn();
 
-  // Function to pipe streams without altering them
   const pipeStream = async (
-    reader: ReadableStreamDefaultReader<Uint8Array>,
-    writer: typeof Deno.stdout | typeof Deno.stderr,
-    filter?: (line: string) => boolean,
+    stream: ReadableStream<Uint8Array>,
+    filter?: (line: string) => boolean
   ) => {
-    const decoder = new TextDecoder();
-    const encoder = new TextEncoder();
+    const textStream = stream
+      .pipeThrough(new TextDecoderStream())
+      .pipeThrough(new TextLineStream());
 
-    while (true) {
-      const { value, done } = await reader.read();
-      if (done) break;
-
-      let text = decoder.decode(value);
-
-      if (filter) {
-        // Split into lines for filtering
-        const lines = text.split("\n");
-        const filteredLines = lines.filter(filter);
-        text = filteredLines.join("\n");
+    try {
+      for await (const line of textStream) {
+        if (!filter || filter(line)) {
+          await Deno.stdout.write(new TextEncoder().encode(line + "\n"));
+        }
       }
-
-      // Write the (possibly filtered) text
-      if (text) {
-        writer.writeSync(encoder.encode(text));
-      }
+    } catch (error) {
+      console.error("Error in stream processing:", error);
     }
   };
 
-  // Pipe stdout without filtering
-  pipeStream(process.stdout.getReader(), Deno.stdout);
+  if (process.stdout) {
+    const reader = process.stdout.getReader();
+    const stream = new ReadableStream({
+      start(controller) {
+        (async () => {
+          try {
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              controller.enqueue(value);
+            }
+          } finally {
+            reader.releaseLock();
+            controller.close();
+          }
+        })();
+      },
+    });
+    pipeStream(stream);
+  }
 
-  // Pipe stderr with filtering
-  pipeStream(process.stderr.getReader(), Deno.stderr, (line) => {
-    return filters.every((filter) => !line.includes(filter));
-  });
+  if (process.stderr) {
+    const reader = process.stderr.getReader();
+    const stream = new ReadableStream({
+      start(controller) {
+        (async () => {
+          try {
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              controller.enqueue(value);
+            }
+          } finally {
+            reader.releaseLock();
+            controller.close();
+          }
+        })();
+      },
+    });
+    pipeStream(stream, (line) => filters.every((filter) => !line.includes(filter)));
+  }
 
   return process;
 };
