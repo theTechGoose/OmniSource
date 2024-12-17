@@ -49,5 +49,3 @@ export async function killAllDenoProcessesExceptCurrent(): Promise<void> {
   }
 }
 
-// Run the function to kill all Deno processes except the current one
-killAllDenoProcessesExceptCurrent();

@@ -1,148 +1,60 @@
-import { glob } from "#glob";
-import { withTryCatch } from "../higher-order-functions/mod.ts";
-import { assertEquals } from "#std/assert";
-import {
-  access,
-  mkdir,
-  readdir,
-  readFile,
-  stat,
-  unlink,
-  writeFile,
-} from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { getProjectRoot } from "../core/mod.ts";
-import { pad, thrw } from "../mod.ts";
-import { dirname, fromFileUrl } from "#std";
+import { fromFileUrl } from "#std";
+import { withTryCatch } from "@libs/utils";
+import { execSync } from "node:child_process";
 
-export class TestValueManager {
+export class TestValueManager<T extends string> {
   private dirname: string;
-  private sampleCache: Record<string, { value: string; dir: string }> = {};
-  private noCacheFlag = false;
-  constructor(private meta: string, private quiet = false) {
+  private _mockCwd: Promise<string> = null as any;
+  constructor(private meta: string, readonly names: Array<T>) {
     this.dirname = fromFileUrl(this.meta);
   }
 
-  setNoCacheFlag() {
-    this.noCacheFlag = true;
+  get mockCwd() {
+    if (this._mockCwd) return this._mockCwd;
+    return getProjectRoot(this.dirname);
   }
 
-  private async exists(path: string) {
-    const [exists] = await withTryCatch(async () => {
-      await access(path);
-      const stats = await stat(path);
-      return stats.isDirectory();
+  get testFolder() {
+    return this.mockCwd.then((root) => {
+      return join(root, "test-data");
     });
-    const output = !!exists;
-    return output;
   }
 
-  private async sampleFile(_name: string) {
-    const name = _name.includes(":::") ? _name.split(":::")[0] : _name;
-    if (this.sampleCache[name]) return this.sampleCache[name];
-    const projectRoot = await getProjectRoot(this.dirname);
-    this.log(`found project root: ${projectRoot}`);
-    if (!projectRoot) throw new Error("Project root not found");
-    const testDataFolder = join(projectRoot, "test-data");
-    let [filePath] = await glob(`**/${name}*.json`, {
-      cwd: testDataFolder,
-      absolute: true,
-    });
-    if (!filePath) filePath = join(testDataFolder, name, `${name}:::000.json`);
-    const payload = {
-      value: filePath,
-      dir: dirname(filePath),
+  file(ext: "json" | "ts", ...path: Array<string>) {
+    const processedPath = [...path];
+    processedPath[processedPath.length - 1] += `.${ext}`;
+    return this.testFolder.then((folder) => join(folder, ...processedPath));
+  }
+
+  async get(name: T) {
+    const path = await this.file("json", name);
+    const [_file] = await withTryCatch(() => readFile(path, "utf8"));
+
+    const update = async (change: any) => {
+      const payload = JSON.stringify(change, null, 2);
+      await this.copyToClipboard(_file);
+      await writeFile(path, payload);
     };
-    this.sampleCache[name] = payload;
-    return payload;
+
+    const [file] = withTryCatch(() => JSON.parse(_file ?? "{}"));
+
+    return [file, update] as const;
   }
 
-  private async determineVersion(name: string, forNew = false) {
-    const inc = (num: number) => forNew ? num + 1 : num;
-    if (this.noCacheFlag) return 0
-    const [key, version] = name.split(":::");
-    if (version) {
-      const earlyOutput =  Number(version)
-      this.log(`early output: ${earlyOutput}`);
-      return earlyOutput;
-    }
-    const { value, dir } = await this.sampleFile(key);
-    if (!value) return inc(0);
-    const exists = await this.exists(dir);
-    if (!exists) return inc(0);
-    const files = await readdir(dir);
-    if (!files[0]) return inc(0);
-    const parsedFileVersions = files.map((f) => {
-      const [key, version] = f.split(":::");
-      const outputVersion = +(version.split(".")[0])
-      return {
-        key,
-        number: outputVersion,
-        file: f,
-      };
-    }).sort((a, b) => a.number - b.number);
-    const latestVersion = parsedFileVersions.reverse()[0];
-    if(latestVersion.number === 0) return inc(0);
-    return inc(latestVersion.number);
+  shellEscape(arg: string) {
+    return `'${arg.replace(/'/g, `'\\''`)}'`;
   }
 
-  private async buildVersionPath(_name: string, version: number) {
-    const name = _name.includes(":::") ? _name.split(":::")[0] : _name;
-    const sample = await this.sampleFile(name);
-    const { dir } = sample;
-    const paddedVersion = pad(version, 6);
-    return join(dir, `${name}:::${paddedVersion}.json`);
-  }
-
-  async get(_name: string, _version: number) {
-    const [file] = await withTryCatch(async () => {
-      const name = `${_name}:::${_version}`;
-      const version = await this.determineVersion(name);
-      const filePath = await this.buildVersionPath(name, version);
-      console.log(`[TEST SAMPLER]::latest version: ${version}`);
-      const [file, err] = await withTryCatch(async () => {
-        const fileContent = await readFile(filePath, "utf-8");
-        this.log(`found file: ${filePath}`);
-        return {
-          parsed: JSON.parse(fileContent),
-          raw: fileContent,
-        };
-      });
-      if (!file) thrw("File not found");
-      this.log(`returning content: ${file.raw}`);
-      return file.parsed;
+  copyToClipboard(_text?: string) {
+    if(!_text) return Promise.resolve("");
+    const text = this.shellEscape(_text);
+    return new Promise((resolve) => {
+      console.log(text);
+      execSync(`echo ${text} | pbcopy`);
+      resolve("");
     });
-    return file;
-  }
-
-  async setValue(key: string, value: any) {
-    this.log(`setting value for ${key}`);
-    const version = await this.determineVersion(key);
-    const sample = await this.sampleFile(key);
-    const exists = await this.exists(sample.dir);
-    if (!exists) await mkdir(sample.dir, { recursive: true });
-    const latestVersionPath = await this.buildVersionPath(key, version);
-    const [fileStats] = await withTryCatch(async () => await stat(latestVersionPath))
-    if (version === 0 && fileStats && fileStats.isFile()) await unlink(latestVersionPath);
-    const [latestRawVersionContent] = await withTryCatch(async () => {
-      return await readFile(latestVersionPath, "utf-8");
-    });
-
-    const latestVersionContent = JSON.parse(latestRawVersionContent ?? "{}");
-    const [isSame, err] = withTryCatch(() => {
-      assertEquals(latestVersionContent, value)
-      return true
-    });
-    this.log(`is same: ${isSame}`);
-    if (isSame) return;
-    const newVersion = await this.determineVersion(key, true);
-    const newVersionPath = await this.buildVersionPath(key, newVersion);
-    console.log(`[TEST SAMPLER]::new version: ${newVersion}`);
-    await writeFile(newVersionPath, JSON.stringify(value, null, 2));
-  }
-
-  log(message: string) {
-    if (this.quiet) return;
-    console.log(message);
   }
 }

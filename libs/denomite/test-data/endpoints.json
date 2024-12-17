@@ -1,0 +1,4 @@
+{
+  "imprt": "import dupeTestRunV001 from './dupe-test/e1/v001.ts';",
+  "content": "{\nmethod: 'post',\nroute: 'dupe-test/run/V001',\nhandler: dupeTestRunV001,\nauth: new DupeTestController().canActivate,\n}"
+}

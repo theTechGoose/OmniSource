@@ -1,6 +1,6 @@
 import { readdir } from "node:fs/promises";
 import {dirname} from '#std';
-import { camelToKebabCase } from "@libs/utils";
+import { camelToKebabCase, getArg, toCamelCaseVariableName } from "@libs/utils";
 import { join, relative, resolve } from "node:path";
 import { glob } from "#glob";
 import { customAlphabet } from "#nanoid";
@@ -47,9 +47,10 @@ export class ControllerParser {
 
   private async _parse(controllerPath: string): Promise<EndpointConfig[]> {
     const controllerExports = await import(controllerPath);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     const ControllerClass = Object.values(controllerExports)[0] as any;
     const controllerInstance = new ControllerClass();
-    const controllerName =       controllerInstance.constructor.name
+    const controllerName =  controllerInstance.constructor.name
 
     const endpointConfigs: EndpointConfig[] = [];
 
@@ -97,7 +98,6 @@ export class ControllerParser {
     controllerPath: string,
   ): EndpointConfig {
     const controllerRoute = camelToKebabCase(controllerName.split('Controller').join(''))
-    console.log({controllerRoute})
     const fullPath = join(endpointPath, file);
     const fullRoute = `${controllerRoute}${route}/${version}`;
 
@@ -117,11 +117,10 @@ export function buildEndpointOutput(
     EndpointConfig,
   registryPath: string,
 ) {
-  console.log({ registryPath, fullPath, controllerPath });
   
   const endpointRelativeImportPath = relative(dirname(registryPath), fullPath);
   const controllerRelativeImportPath = relative(dirname(registryPath), controllerPath);
-  const endpointId = nanoid();
+  const endpointId = toCamelCaseVariableName(fullRoute)
   controllerImports[controllerName] = `import {${controllerName}} from './${controllerRelativeImportPath}';\n`
   const imprt = `import ${endpointId} from './${endpointRelativeImportPath}';`;
   const content =
@@ -133,7 +132,6 @@ export function buildEndpointOutput(
 }
 
 export async function buildRegistry(endpoints: Array<EndpointConfig>, registryPath: string) {
-  console.log({endpoints})
   const elements = endpoints.map((e) => buildEndpointOutput(e, registryPath))
   const imports = elements.map(e => e.imprt).join('\n')
   const object = elements.map(e => e.content).join(',')
@@ -142,4 +140,12 @@ export async function buildRegistry(endpoints: Array<EndpointConfig>, registryPa
   await writeFile(registryPath, built)
   await execAsync(`deno fmt ${registryPath}`)
   return built
+}
+
+export async function scriptModeLogic() {
+  const cwd = Deno.cwd()
+  console.log(`building ${cwd}`)
+  const controllers = await getAllControllers(cwd)
+  const allConfigs = await new ControllerParser(...controllers).parse()
+  await buildRegistry(allConfigs, join(cwd, 'registry.ts'))
 }

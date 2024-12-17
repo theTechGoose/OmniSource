@@ -1,67 +1,67 @@
-import { assertEquals, assertStringIncludes, fromFileUrl } from "#std";
-import { getProjectRoot, TestValueManager } from "@libs/utils";
+import { assertEquals, assertStringIncludes } from "#std";
+import { TestValueManager } from "@libs/utils";
 import {
   buildEndpointOutput,
+  buildRegistry,
   ControllerParser,
   getAllControllers,
-  buildRegistry
 } from "./mod.ts";
-import { resolve } from "node:path";
 
-const vm = new TestValueManager(import.meta.url, true);
-const mockCwd = await getProjectRoot(fromFileUrl(import.meta.url));
-const registryFile = `${mockCwd}/test-data/test-server/registry.ts`;
-vm.setNoCacheFlag();
-
-// get cwd
-// find all controllers below cwd
-// instancitate the controller
-// parse each of the endpoints
-// -- read the key
-// ---- get the path to the directory of the endpoints
-// -- read the endpoint directory
-// ---- get all of the file paths to the functions
-// ---- build the route from the controllerName, route and version for each of the files in the folder
-// -- read the value
-// ---- get the method by building a relative path from the registry to the endpoint
-// -- pull the auth from the canActivate function
-// -- build the endpoint
-//
-//
-//
+const vm = new TestValueManager(import.meta.url, [
+  "controller-paths",
+  "endpoint-configs",
+  "endpoints",
+  "registry",
+]);
 
 Deno.test("should get all controllers", async () => {
-  const testPathSnapshot = await vm.get("controller-paths", 1);
-  const controllers = await getAllControllers(mockCwd);
-  await vm.setValue("controller-paths", controllers);
-  console.log({controllers, testPathSnapshot})
-  assertEquals(controllers, testPathSnapshot);
+  const [snap] = await vm.get("controller-paths");
+  const controllers = await getAllControllers(await vm.mockCwd);
+  assertEquals(controllers, snap);
 });
 
 Deno.test("it should parse the endpoints using the controller (cached)", async () => {
-  const testPathSnapshot = await vm.get("controller-paths", 1);
-  const allConfigs = await new ControllerParser(...testPathSnapshot).parse();
-  const testEndpointSnapshot = await vm.get("endpoints", 1);
-  await vm.setValue("endpoints", allConfigs);
-  assertEquals(allConfigs, testEndpointSnapshot);
+  const [pathSnap] = await vm.get("controller-paths");
+  const allConfigs = await new ControllerParser(...pathSnap).parse();
+  const endpointConfigSnap = {
+    method: "Post",
+    fullRoute: "dupe-test/run/V001",
+    fullPath:
+      "/Users/goose/Documents/New_Programing/OmniSource/libs/denomite/test-data/test-server/dupe-test/e1/v001.ts",
+    controllerName: "DupeTestController",
+    controllerPath:
+      "/Users/goose/Documents/New_Programing/OmniSource/libs/denomite/test-data/test-server/dupe-test/config.ts",
+  };
+
+  assertEquals(allConfigs[0], endpointConfigSnap);
+  const [_, update] = await vm.get("endpoint-configs");
+  update(allConfigs);
 });
 
 Deno.test("it should build the endpoints using the endpoint configs", async () => {
-  const testEndpointSnapshot = await vm.get("endpoints", 1);
-  const builtEndpoint = buildEndpointOutput(
-    testEndpointSnapshot[0],
-    registryFile,
-  );
-  await vm.setValue("built-endpoints", builtEndpoint);
-  assertStringIncludes(builtEndpoint.content, "route: 'dupe-test/run/V001',\n");
+  const registryFile = await vm.file("ts", "test-server", "registry");
+  const [snap] = await vm.get("endpoint-configs");
+  const builtEndpoint = buildEndpointOutput(snap[0], registryFile);
+  const [_, update] = await vm.get("endpoints");
+  console.log(builtEndpoint);
+  await update(builtEndpoint);
+
+  const sample = {
+    "imprt": "import CRWsWKFtERtHkjOxMjGExJXGg from './dupe-test/e1/v001.ts';",
+    content: {
+      method: "post",
+      route: "dupe-test/run/V001",
+    },
+  };
+  assertStringIncludes(builtEndpoint.content, sample.content.route);
+  assertStringIncludes(builtEndpoint.content, sample.content.method);
 });
 
 Deno.test("it should build the complete file", async () => {
-  const vmKey = 'registry';
-  const endpoints = await vm.get("endpoints", 1);
-  const registry = await buildRegistry(endpoints, registryFile);
-  await vm.setValue(vmKey, registry);
-  const registrySnapshot = await vm.get(vmKey, 1);
-  console.log(registry)
-  assertEquals(registry, registrySnapshot);
-})
+  const registryFile = await vm.file("ts", "test-server", "registry");
+  const [endpointSnap] = await vm.get("endpoint-configs");
+  const registry = await buildRegistry(endpointSnap, registryFile);
+  const [_, update] = await vm.get("registry");
+  await update(registry);
+  assertStringIncludes(registry, "./dupe-test/e1/v001.ts");
+});

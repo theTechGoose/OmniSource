@@ -1,12 +1,19 @@
 import { dirname, join } from "#std";
 
-export async function getProjectRoot(dir: string): Promise<string> {
+export async function getProjectRoot(_dir: string): Promise<string> {
+  let dir = _dir;
+  if(dir.includes('.ts') ) dir = dirname(_dir);
   while (true) {
     for (const name of ["deno.json", "deno.jsonc"]) {
       const path = join(dir, name);
+      console.log({path})
       try {
-        if ((await Deno.stat(path)).isFile) return dirname(path);
-      } catch {
+        const stats = await Deno.stat(path)
+        const isFile = stats.isFile;
+        console.log({isFile, path})
+        if (isFile) return dirname(path);
+      } catch(e: any) {
+        console.log(e.message)
         // Ignore file not found errors
       }
     }

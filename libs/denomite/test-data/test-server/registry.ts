@@ -1,62 +1,62 @@
 import { DupeTestController } from "./dupe-test/config.ts";
 import { TestController } from "./test/config.ts";
 
-import dDpjRjvpDjwNrCshNFZfFlfnt from "./dupe-test/e1/v001.ts";
-import JnLUUFmrRLNffkJQVfvpLfRzl from "./dupe-test/e1/v002.ts";
-import YzhSrLdAxWniAjsaKVncKdUKS from "./dupe-test/e2/v001.ts";
-import oKIxPoOlBqhESTztTDIGLMqug from "./dupe-test/e3/v001.ts";
-import oBiUKkvnwZYSSlbNOaCacNniG from "./test/e1/v001.ts";
-import AHBWFkJHkDmZqwiWiJeMOtuXi from "./test/e1/v002.ts";
-import elHqnMfWXqgCFqERGmqqUNiZf from "./test/e2/v001.ts";
-import QDtNNwkHzgHwtJSANFWRqBFcx from "./test/e3/v001.ts";
+import dupeTestRunV001 from "./dupe-test/e1/v001.ts";
+import dupeTestRunV002 from "./dupe-test/e1/v002.ts";
+import dupeTestListV001 from "./dupe-test/e2/v001.ts";
+import dupeTestExecV001 from "./dupe-test/e3/v001.ts";
+import testRun2V001 from "./test/e1/v001.ts";
+import testRun2V002 from "./test/e1/v002.ts";
+import testList2V001 from "./test/e2/v001.ts";
+import testExec2V001 from "./test/e3/v001.ts";
 
 export const registry = [
   {
     method: "post",
     route: "dupe-test/run/V001",
-    handler: dDpjRjvpDjwNrCshNFZfFlfnt,
+    handler: dupeTestRunV001,
     auth: new DupeTestController().canActivate,
   },
   {
     method: "post",
     route: "dupe-test/run/V002",
-    handler: JnLUUFmrRLNffkJQVfvpLfRzl,
+    handler: dupeTestRunV002,
     auth: new DupeTestController().canActivate,
   },
   {
     method: "get",
     route: "dupe-test/list/V001",
-    handler: YzhSrLdAxWniAjsaKVncKdUKS,
+    handler: dupeTestListV001,
     auth: new DupeTestController().canActivate,
   },
   {
     method: "post",
     route: "dupe-test/exec/V001",
-    handler: oKIxPoOlBqhESTztTDIGLMqug,
+    handler: dupeTestExecV001,
     auth: new DupeTestController().canActivate,
   },
   {
     method: "post",
     route: "test/run2/V001",
-    handler: oBiUKkvnwZYSSlbNOaCacNniG,
+    handler: testRun2V001,
     auth: new TestController().canActivate,
   },
   {
     method: "post",
     route: "test/run2/V002",
-    handler: AHBWFkJHkDmZqwiWiJeMOtuXi,
+    handler: testRun2V002,
     auth: new TestController().canActivate,
   },
   {
     method: "get",
     route: "test/list2/V001",
-    handler: elHqnMfWXqgCFqERGmqqUNiZf,
+    handler: testList2V001,
     auth: new TestController().canActivate,
   },
   {
     method: "post",
     route: "test/exec2/V001",
-    handler: QDtNNwkHzgHwtJSANFWRqBFcx,
+    handler: testExec2V001,
     auth: new TestController().canActivate,
   },
 ];

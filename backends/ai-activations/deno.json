@@ -1,0 +1,6 @@
+{
+  "tasks": {
+    "dev": "deno -A --watch --watch-exclude=registry.ts ./main.ts   -- --build --serve",
+    "build": "deno -A ./main.ts -- --build"
+  }
+}

@@ -11,7 +11,6 @@ export function getArg(name: string, ...valid: Array<string>) {
 }
 
 function validate(value: any, ...validate: Array<string>) {
-  console.log(value)
   if(!validate.length) return value
   const output = validate.includes(value)
   if(!output) throw new Error(`Invalid arg value: ${value}, valid values: ${validate.join(", ")}`)
