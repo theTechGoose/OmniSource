@@ -3,13 +3,23 @@
   "version": "0.0.1",
   "license": "MIT",
   "exports": "./mod.ts",
-  "tasks": {},
+  "tasks": {
+    "test": "deno test -A",
+    "check": "deno fmt --check && deno lint && deno check **/*.ts"
+  },
+  "compilerOptions": {
+    "types": ["./deno.d.ts"],
+    "lib": ["deno.ns", "deno.window"]
+  },
   "imports": {
-    "@core": "./core/_mod.ts",
-    "@arrays": "./arrays/_mod.ts",
-    "@validation": "./validation/_mod.ts",
-    "@higher-order-functions": "./higher-order-functions/_mod.ts",
-    "@string-manipulation": "./string-manipulation/_mod.ts"
+    "@core": "./core/mod.ts",
+    "@arrays": "./arrays/mod.ts",
+    "@validation": "./validation/mod.ts",
+    "@higher-order-functions": "./higher-order-functions/mod.ts",
+    "@string-manipulation": "./string-manipulation/mod.ts",
+    "#std/assert": "jsr:@std/assert@1",
+    "#std/testing/mock": "jsr:@std/testing/mock@1",
+    "#std/async": "jsr:@std/async@1"
   },
   "fmt": {
     "options": {
