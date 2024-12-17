@@ -1,5 +1,5 @@
-import {debounce} from "#std";
-import { runCommand, withTryCatch } from "@libs/utils";
+import { debounce } from "#std/async/debounce.ts";
+import { runCommand, withTryCatch } from "@core/mod.ts";
 
 export class ProcessManager {
   processes = [] as Array<Deno.ChildProcess>;
@@ -20,8 +20,8 @@ export class ProcessManager {
     this.debounce(_cmd);
   }
 
-
-  private _spawn(_cmd: string) {
+  // Changed from private to protected for testing
+  protected _spawn(_cmd: string) {
     const cmd = _cmd.split(" ");
     const p = runCommand(this.root, cmd);
     this.processes.push(p);
