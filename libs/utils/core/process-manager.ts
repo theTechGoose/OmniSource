@@ -1,5 +1,5 @@
-import { debounce } from "#std/async/debounce.ts";
-import { runCommand, withTryCatch } from "@core/mod.ts";
+import { debounce } from "@std/async";
+import { runCommand } from "./run-cmd.ts";
 
 export class ProcessManager {
   processes = [] as Array<Deno.ChildProcess>;
@@ -12,7 +12,11 @@ export class ProcessManager {
 
   killAll() {
     for (const p of this.processes) {
-      withTryCatch(() => p.kill("SIGTERM"));
+      try {
+        p.kill("SIGTERM");
+      } catch (e) {
+        console.error('Error killing process:', e);
+      }
     }
   }
 

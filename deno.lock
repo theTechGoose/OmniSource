@@ -1463,6 +1463,9 @@
       "jsr:@libs/std@^2024.10.5",
       "jsr:@oak/oak@16.1.0",
       "jsr:@std/assert@1",
+      "jsr:@std/async@1",
+      "jsr:@std/events@1",
+      "jsr:@std/streams@1",
       "jsr:@std/testing@*",
       "npm:axios@*",
       "npm:esbuild@0.20.2",
@@ -1480,6 +1483,14 @@
       "libs/raptorize-di": {
         "dependencies": [
           "npm:reflect-metadata@0.2.1"
+        ]
+      },
+      "libs/utils": {
+        "dependencies": [
+          "jsr:@std/assert@1",
+          "jsr:@std/async@1",
+          "jsr:@std/events@1",
+          "jsr:@std/streams@1"
         ]
       }
     }

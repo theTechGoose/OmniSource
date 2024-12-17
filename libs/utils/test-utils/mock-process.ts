@@ -1,4 +1,4 @@
-import { EventEmitter } from '../deps.ts';
+import { EventEmitter } from "@std/events";
 
 export class MockChildProcess extends EventEmitter implements Deno.ChildProcess {
   private emitter = new EventEmitter();
@@ -6,9 +6,26 @@ export class MockChildProcess extends EventEmitter implements Deno.ChildProcess 
   killed = false;
   pid = Math.floor(Math.random() * 1000);
   status = Promise.resolve({ success: true, code: 0 });
-  stdin: null | Deno.Writer = null;
-  stdout: null | Deno.Reader = null;
-  stderr: null | Deno.Reader = null;
+  stdout: ReadableStream<Uint8Array>;
+  stderr: ReadableStream<Uint8Array>;
+  stdin: WritableStream<Uint8Array>;
+
+  constructor() {
+    super();
+    // Create mock streams
+    this.stdout = new ReadableStream({
+      start(controller) {
+        controller.enqueue(new TextEncoder().encode("test output\n"));
+        controller.close();
+      }
+    });
+    this.stderr = new ReadableStream({
+      start(controller) {
+        controller.close();
+      }
+    });
+    this.stdin = new WritableStream();
+  }
 
   kill(_signo?: string): void {
     this.killed = true;
@@ -22,6 +39,7 @@ export class MockChildProcess extends EventEmitter implements Deno.ChildProcess 
   emit(event: string, ...args: any[]): boolean {
     return this.emitter.emit(event, ...args);
   }
+
   on(event: string, listener: (...args: any[]) => void): this {
     this.emitter.on(event, listener);
     return this;

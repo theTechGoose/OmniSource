@@ -1,49 +1,54 @@
-import { assertEquals, assertExists, delay } from '../deps.ts';
-import { ProcessManager } from './process-manager.ts';
-import { createMockProcess } from '@test-utils';
+import { assertEquals, assertExists, delay } from "#std/assert";
+import { ProcessManager } from "./process-manager.ts";
+import { runCommand } from "./run-cmd.ts";
+import { createMockProcess } from "@test-utils";
 
-// Create test class to access protected methods
 class TestProcessManager extends ProcessManager {
-  public testSpawn(cmd: string) {
-    return this._spawn(cmd);
+  public processes: Deno.ChildProcess[] = [];
+
+  protected spawn(cmd: string): Deno.ChildProcess {
+    const process = createMockProcess();
+    this.processes.push(process);
+    return process;
+  }
+
+  public killAll(): void {
+    this.processes.forEach((process) => process.kill());
   }
 }
 
-// Mock runCommand to return our mock process
-const originalRunCommand = globalThis.runCommand;
-const mockRunCommand = (_root: string, _cmd: string[]) => createMockProcess();
+// Store original runCommand
+const originalRunCommand = runCommand;
 
-Deno.test('ProcessManager', async (t) => {
+Deno.test("ProcessManager", async (t) => {
   let pm: TestProcessManager;
 
   // Setup and teardown
   t.beforeEach(() => {
-    (globalThis as any).runCommand = mockRunCommand;
-    pm = new TestProcessManager('/test/root');
+    pm = new TestProcessManager();
   });
 
   t.afterEach(() => {
-    (globalThis as any).runCommand = originalRunCommand;
     pm.killAll();
   });
 
-  await t.step('should create and track processes', () => {
-    const process = pm.testSpawn('test command');
+  await t.step("should create and track processes", () => {
+    const process = pm.spawn("test command");
     assertExists(process);
     assertEquals(pm.processes.length, 1);
   });
 
-  await t.step('should kill all processes', () => {
-    const process = pm.testSpawn('test command');
+  await t.step("should kill all processes", () => {
+    const process = pm.spawn("test command");
     pm.killAll();
     assertEquals((process as any).killed, true);
     assertEquals(pm.processes.length, 1); // Processes array is not cleared
   });
 
-  await t.step('should debounce process spawning', async () => {
-    pm.spawn('test command');
-    pm.spawn('test command');
-    pm.spawn('test command');
+  await t.step("should debounce process spawning", async () => {
+    pm.spawn("test command");
+    pm.spawn("test command");
+    pm.spawn("test command");
 
     // Wait for debounce timeout
     await delay(3100);
@@ -52,9 +57,9 @@ Deno.test('ProcessManager', async (t) => {
     assertEquals(pm.processes.length, 1);
   });
 
-  await t.step('should handle multiple commands', () => {
-    const cmds = ['cmd1', 'cmd2', 'cmd3'];
-    pm.handleChange(cmds, 'test comment');
+  await t.step("should handle multiple commands", () => {
+    const cmds = ["cmd1", "cmd2", "cmd3"];
+    pm.handleChange(cmds, "test comment");
     assertEquals(pm.processes.length, 3);
   });
 });
