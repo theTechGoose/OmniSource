@@ -1,4 +1,3 @@
-
 type Funclet<V, F extends (...args: any[]) => any> = F & {
   vault: V;
 };
@@ -13,7 +12,9 @@ export function createFunclet<V, F extends (...args: any[]) => any>(
   vault: V,
   fn: F,
 ): Funclet<V, F> {
-  const funclet = fn as Funclet<V, F>;
+  const funclet = function(this: unknown, ...args: Parameters<F>): ReturnType<F> {
+    return fn.apply(this, args);
+  } as Funclet<V, F>;
   funclet.vault = vault;
   return funclet;
 }
