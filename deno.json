@@ -26,7 +26,7 @@
     "#nanoid": "npm:nanoid@5.0.7",
     "#oak": "jsr:@oak/oak@16.1.0",
     "#reflect": "npm:reflect-metadata@0.2.1",
-    "#std/assert": "jsr:@std/assert@1",
+    "#assert": "jsr:@std/assert",
     "#path": "jsr:@std/path",
     "$std/mock": "jsr:@std/testing/mock",
     "#zod": "npm:zod",
@@ -52,3 +52,4 @@
     "include": [],
     "entrypoint": "backends/ai-activations/main.ts"
   }
+}

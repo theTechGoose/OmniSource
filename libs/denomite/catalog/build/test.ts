@@ -1,4 +1,4 @@
-import { assertEquals, assertStringIncludes } from "#std";
+import { assertEquals, assertStringIncludes } from "@assert";
 import { TestValueManager } from "@libs/utils";
 import {
   buildEndpointOutput,

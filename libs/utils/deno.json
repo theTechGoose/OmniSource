@@ -7,10 +7,6 @@
     "test": "deno test -A",
     "check": "deno fmt --check && deno lint && deno check **/*.ts"
   },
-  "compilerOptions": {
-    "types": ["./deno.d.ts"],
-    "lib": ["deno.ns", "deno.window"]
-  },
   "imports": {
     "@test-utils": "./test-utils/mod.ts",
     "@core": "./core/mod.ts",

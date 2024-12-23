@@ -15,9 +15,6 @@ export function Dependency<T extends Object>(target: T) {
   const params = Reflect.getMetadata("design:paramtypes", target) ?? [];
   const dep = new PreparedDependency(target as any, params);
   λ.vault.addDependency(dep);
-
-  return class {
-    static id: string = dep.id;
-    id: string = dep.id;
-  } as unknown as T & { id: string };
+  //@ts-ignore dumb bullshit
+  target.id = dep.id;
 }

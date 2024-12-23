@@ -1,4 +1,4 @@
-import { assertEquals } from "@std/assert";
+import { assertEquals } from "#assert";
 import { Dependency } from "./mod.ts";
 import { λ } from "./mod.ts";
 
@@ -11,7 +11,7 @@ class ConsoleLogger {
 }
 
 // Integration test demonstrating full dependency injection flow
-Deno.test("Integration - Full dependency injection flow", () => {
+Deno.test("Integration - Full dependency injection flow", async () => {
   // Define service interfaces
   interface ILogger {
     log(message: string): void;
@@ -21,9 +21,9 @@ Deno.test("Integration - Full dependency injection flow", () => {
     getCurrentUser(): string;
   }
 
-  // Implement services
   @Dependency
   class UserService implements IUserService {
+    dooks = 'dookster'
     constructor(private logger: ConsoleLogger) {}
 
     getCurrentUser(): string {
@@ -33,7 +33,9 @@ Deno.test("Integration - Full dependency injection flow", () => {
   }
 
   // Test the complete flow
+  λ.vault.init()
   const userService = λ(UserService);
+
   assertEquals(userService instanceof UserService, true);
   assertEquals(userService.getCurrentUser(), "test-user");
 });
@@ -60,7 +62,7 @@ Deno.test("Integration - Complex dependency graph", () => {
   class ApiService {
     constructor(
       private http: HttpClient,
-      private logger: ConsoleLogger
+      private logger: ConsoleLogger,
     ) {}
 
     init(): string {
@@ -69,7 +71,9 @@ Deno.test("Integration - Complex dependency graph", () => {
     }
   }
 
+  λ.vault.init()
   const apiService = λ(ApiService);
+  console.log(apiService)
   assertEquals(apiService instanceof ApiService, true);
   assertEquals(apiService.init(), "https://api.example.com");
 });

@@ -1,5 +1,5 @@
-import { assertEquals, assertThrows } from "@std/assert";
-import { Resolver } from "./~mod.ts";
+import { assertEquals, assertThrows } from "#assert";
+import { Resolver } from "./_mod.ts";
 import { ResolverCache } from "./helpers/cache/~mod.ts"; // Adjust the import path as necessary
 import { Reflect } from "@reflect"; // Ensure Reflect is available
 

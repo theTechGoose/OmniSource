@@ -67,6 +67,9 @@ export class DependencyManifest implements DependencyManifest {
   }
 
   getDependencyByConstructor(constructor: Constructor) {
-    return this.manifest.find((dep) => dep.target === constructor);
+    const ret =  this.manifest.find((dep) => {
+      return dep.target === constructor
+    });
+    return ret;
   }
 }

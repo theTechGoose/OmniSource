@@ -1,5 +1,5 @@
 import {debounce} from "#async";
-import { runCommand, withTryCatch } from "@libs/utils";
+import { withTryCatch } from "@libs/utils";
 
 export class ProcessManager {
   processes = [] as Array<Deno.ChildProcess>;
@@ -27,7 +27,11 @@ export class ProcessManager {
   // Changed from private to protected for testing
   protected _spawn(_cmd: string) {
     const cmd = _cmd.split(" ");
-    const p = runCommand(this.root, cmd);
+    const template = new Deno.Command(cmd[0], {
+      args: cmd.slice(1),
+      cwd: this.root,
+    })
+    const p = template.spawn();
     this.processes.push(p);
     return p;
   }
