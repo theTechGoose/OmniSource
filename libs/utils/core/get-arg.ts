@@ -1,5 +1,12 @@
+let mockArgs: string[] | null = null;
+
+function parseArgs(args: string[]) {
+  return mockArgs ?? args;
+}
+
 export function getArg(name: string, ...valid: Array<string>) {
-  const arg = Deno.args.find((a) => a.startsWith("--" + name));
+  const args = parseArgs(Deno.args);
+  const arg = args.find((a) => a.startsWith("--" + name));
   const splitArr = arg?.split('=') ?? []
   const isPair = splitArr.length === 2
   const [key, value] = splitArr
@@ -15,4 +22,10 @@ function validate(value: any, ...validate: Array<string>) {
   const output = validate.includes(value)
   if(!output) throw new Error(`Invalid arg value: ${value}, valid values: ${validate.join(", ")}`)
   return value
+}
+
+// Exposed for testing
+export const _internals = {
+  setMockArgs: (args: string[] | null) => { mockArgs = args; },
+  parseArgs
 }
