@@ -412,6 +412,14 @@
         "dependencies": [
           "npm:reflect-metadata@0.2.1"
         ]
+      },
+      "libs/utils": {
+        "dependencies": [
+          "jsr:@std/assert@1",
+          "jsr:@std/async@1",
+          "jsr:@std/events@1",
+          "jsr:@std/streams@1"
+        ]
       }
     }
   }

@@ -12,7 +12,11 @@ export class ProcessManager {
 
   killAll() {
     for (const p of this.processes) {
-      withTryCatch(() => p.kill("SIGTERM"));
+      try {
+        p.kill("SIGTERM");
+      } catch (e) {
+        console.error('Error killing process:', e);
+      }
     }
   }
 
@@ -20,8 +24,8 @@ export class ProcessManager {
     this.debounce(_cmd);
   }
 
-
-  private _spawn(_cmd: string) {
+  // Changed from private to protected for testing
+  protected _spawn(_cmd: string) {
     const cmd = _cmd.split(" ");
     const p = runCommand(this.root, cmd);
     this.processes.push(p);
