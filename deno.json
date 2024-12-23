@@ -2,7 +2,9 @@
   "compilerOptions": {
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "types": ["./globals.d.ts"]
+    "types": [
+      "./globals.d.ts"
+    ]
   },
   "tasks": {},
   "lint": {
@@ -16,6 +18,7 @@
     }
   },
   "imports": {
+    "#async": "jsr:@std/async",
     "#axios": "npm:axios",
     "#emit": "jsr:@deno/emit",
     "#esbuild": "npm:esbuild@0.20.2",
@@ -23,10 +26,10 @@
     "#nanoid": "npm:nanoid@5.0.7",
     "#oak": "jsr:@oak/oak@16.1.0",
     "#reflect": "npm:reflect-metadata@0.2.1",
-    "#std": "jsr:@libs/std",
     "#std/assert": "jsr:@std/assert@1",
-    "#zod": "npm:zod",
+    "#path": "jsr:@std/path",
     "$std/mock": "jsr:@std/testing/mock",
+    "#zod": "npm:zod",
     "@globals/magic-values": "./magic-values.ts",
     "@raptorize/di": "./libs/raptorize-di/mod.ts"
   },
@@ -37,6 +40,16 @@
     "backends/ai-activations"
   ],
   "test": {
-    "exclude": ["transfer-*/**/*"]
+    "exclude": [
+      "transfer-*/**/*"
+    ]
+  },
+  "deploy": {
+    "project": "f7593740-d8e3-4a1e-beaa-51496efdbe7e",
+    "exclude": [
+      "**/node_modules"
+    ],
+    "include": [],
+    "entrypoint": "backends/ai-activations/main.ts"
   }
 }

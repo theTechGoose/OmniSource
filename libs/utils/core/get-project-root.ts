@@ -1,4 +1,4 @@
-import { dirname, join } from "#std";
+import { dirname, join } from "#path";
 
 export async function getProjectRoot(_dir: string): Promise<string> {
   let dir = _dir;

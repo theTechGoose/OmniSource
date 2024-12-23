@@ -1,7 +1,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { getProjectRoot } from "../core/mod.ts";
-import { fromFileUrl } from "#std";
+import { fromFileUrl } from "#path";
 import { withTryCatch } from "@libs/utils";
 import { execSync } from "node:child_process";
 

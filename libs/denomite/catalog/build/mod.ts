@@ -1,5 +1,5 @@
 import { readdir } from "node:fs/promises";
-import {dirname} from '#std';
+import {dirname} from '#path';
 import { camelToKebabCase, getArg, toCamelCaseVariableName } from "@libs/utils";
 import { join, relative, resolve } from "node:path";
 import { glob } from "#glob";
